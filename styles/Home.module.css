@@ -3,19 +3,38 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 6rem;
+  padding: 2rem;
+  width:100%;
   min-height: 100vh;
+  
+}
+
+
+.map-container {
+  height: 55vh;
+  width: auto;
+
+}
+.map{
+  height: 100%;
+  width: 100%;
+  border-style: solid;
+  border-width: 5px;
+  padding:2px;
 }
 
 .description {
-  display: inherit;
-  justify-content: inherit;
-  align-items: inherit;
-  font-size: 0.85rem;
-  max-width: var(--max-width);
-  width: 100%;
+ 
   z-index: 2;
   font-family: var(--font-mono);
+}
+
+.description div{
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-top: 20%;
 }
 
 .description a {
