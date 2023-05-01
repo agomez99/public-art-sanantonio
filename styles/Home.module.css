@@ -33,8 +33,10 @@
   max-width: 100%;
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 1000px;
   margin-top: 20%;
+  border-style: solid;
+  border-width: 5px;
 }
 
 .description a {

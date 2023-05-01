@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import Map from "./components/Map"
@@ -18,13 +17,10 @@ export default function Home() {
 
       </Head>
       <main className={`${styles.main}`}>
-
+          <p>Public Art San Antonio</p>
         <div className={styles.description}>
-        <Map/>
-
+          <Map/>
         </div>
-
-
        
       </main>
     </>
