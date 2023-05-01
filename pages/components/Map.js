@@ -2,14 +2,14 @@ import mapboxgl from "mapbox-gl";
 import React, { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import geoJson from "../data/locations.json"
-
+import Image from "next/image";
 mapboxgl.accessToken =
-  "pk.eyJ1IjoiYWdvbWV6OTkiLCJhIjoiY2tjbWp1cjFqMDIyNjJ6bnNia2NhYXl1OCJ9.cMo6zH8dcAS-1g_nR9HjFQ";
+  "pk.eyJ1IjoiYWdvbWV6OTkiLCJhIjoiY2xoNDFnejYxMXM2cjNncGprdnFyenAwbiJ9.5KJblIsH6U-R-njtiNqLtQ";
 
   const Popup = ({heading, name, image}) => (
     <div className="popup">
       <div className="route-metric-row">
-        <img className="row-value" src={image} alt="location image"/>
+        <Image className="row-value" src={image} alt="location image"/>
       </div>
       <p className="loc-heading"> {heading}</p>
       <p className="loc-artist"> Artist: {name}</p>
