@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 
 
-export const ImageBox = () => {
+const ImageBox = () => {
     return (
         <div className="image-box-container">
                 {data.map((data, key) => {
@@ -23,3 +23,4 @@ export const ImageBox = () => {
 }
 
 
+export default ImageBox;
