@@ -2,10 +2,6 @@ import {data} from '../data/artistdata'
 import Image from 'next/image'
 import Link from 'next/link'
 
-
-
-
-
 export const ImageBox = () => {
     return (
         <div className="image-box-container">

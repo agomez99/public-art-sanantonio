@@ -16,11 +16,18 @@ mapboxgl.accessToken =
     </div>
   )
 
-
+  const Images = ({image}) => {
+    return (
+      <Image className="row-value" src={image} alt="location image"   width={50} height={50}/>
+    )
+    }
 
 const Map = () => {
   const mapContainerRef = useRef(null);
   const popUpRef = useRef(new mapboxgl.Popup({ offset: 15 }))
+
+
+
 
   // Initialize map when component mounts
   useEffect(() => {
@@ -65,6 +72,8 @@ const Map = () => {
       );
     });
 
+    
+
     // Add navigation control (the +/- zoom buttons)
     map.addControl(new mapboxgl.NavigationControl(), "top-right");
     map.on("click", e => {
@@ -91,6 +100,10 @@ const Map = () => {
           .addTo(map)
       }
     })
+
+      
+
+
 
 
     // Clean up on unmount
