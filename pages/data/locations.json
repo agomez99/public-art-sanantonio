@@ -12,7 +12,7 @@
           "properties": {
            "heading":"La Veladora of Our Lady of Guadalupe ",
            "name":"Jesse Trevino",
-           "image":"./images/image2.jpg",
+           "image":"/images/image2.jpg",
            "info": "https://www.getcreativesanantonio.com/Public-Art/Public-Artworks-Map/Public-Artworks-List/Public-Artwork/Article/287/La-Veladora-of-Our-Lady-of-Guadalupe",
             "address": "1315 Guadalupe St",
             "postalCode": "20037"
@@ -31,7 +31,7 @@
           "properties": {
             "heading":"Dream Song Tower ",
             "name":"Ortiz Cruz",
-            "image":"./images/image3.jpg",
+            "image":"/images/image3.jpg",
             "info" : "https://www.getcreativesanantonio.com/Public-Art/Public-Artworks-Map/Public-Artworks-List/Public-Artwork/Article/742/Dream-Song-Tower",
             "address": "Interstate 35 Access Rd & S Zarzamora St",
             "state": "Texas"
@@ -50,7 +50,7 @@
            "heading":"The Torch of Friendship",
            "info" : "https://www.getcreativesanantonio.com/Public-Art/Public-Artworks-Map/Public-Artworks-List/Public-Artwork/Article/165/Torch-of-Friendship-Antorcha-de-Amistad",
            "name":"Sebastián",
-           "image":"./images/image4.jpg",
+           "image":"/images/image4.jpg",
             "address": "333 Losoya Street",
             "city": "San Antonio",
             "postalCode": "20007"
@@ -68,7 +68,7 @@
           "properties": {
               "heading":"Crossroads of Enlightenment",
               "name":" Angel Rodríguez–Díaz",
-              "image":"./images/image5.jpg",
+              "image":"/images/image5.jpg",
               "info": "https://www.getcreativesanantonio.com/Public-Art/Public-Artworks-Map/Public-Artworks-List/Public-Artwork/Article/380/Crossroads-of-Enlightenment",
             "address": "4400 Blanco Road ",
             "city": "San Antonio",
@@ -88,7 +88,7 @@
           "properties": {
             "heading":"Mosaic Murals on The River Walk",
             "name":"Oscar Alvarado ",
-            "image":"./images/image6.jpg",
+            "image":"/images/image6.jpg",
             "info": "https://www.getcreativesanantonio.com/Public-Art/Public-Artworks-Map/Public-Artworks-List/Public-Artwork/Article/164/River-Walk-Mosaic-Murals",
             "address": "849 E Commerce",
             "city": "San Antonio",
@@ -109,7 +109,7 @@
             "heading":"Pioneers of the Sky",
             "name": 
               "Collaboration",
-            "image":"./images/image7.jpg",
+            "image":"/images/image7.jpg",
             "info": "https://www.getcreativesanantonio.com/Public-Art/Public-Artworks-Map/Public-Artworks-List/Public-Artwork/Article/779/Pioneers-of-the-Sky-The-Stinson-School-of-Flying",
             "address": "8410 Mission Road",
             "cc": "US",
@@ -130,7 +130,7 @@
           "properties": {
             "heading": "Powder",
             "name":"Daniel Eime",
-            "image":"./images/image8.jpg",
+            "image":"/images/image8.jpg",
             "info": "https://www.getcreativesanantonio.com/Public-Art/Public-Artworks-Map/Public-Artworks-List/Public-Artwork/Article/762/Powder",
             "address": "502 Burnet St",
             "city": "San Antonio",
@@ -150,7 +150,7 @@
           "properties": {
               "heading":"Red Bird",
               "name":"Michael Lance",
-              "image":"./images/image9.jpg",
+              "image":"/images/image9.jpg",
               "info": "https://www.getcreativesanantonio.com/Public-Art/Public-Artworks-Map/Public-Artworks-List/Public-Artwork/Article/284/Red-Bird",
             "address": "204 Augusta",
             "city": "San Antonio",
@@ -170,7 +170,7 @@
           "properties": {
            "heading":"Maverick Tile Mural",
            "name":"Ethel Wilson Harris ",
-           "image":"./images/image10.jpg",
+           "image":"/images/image10.jpg",
            "info": "https://www.getcreativesanantonio.com/Public-Art/Public-Artworks-Map/Public-Artworks-List/Public-Artwork/Article/160/Maverick-Tile-Mural",
             "address": "Riverwalk- North of Lexington St. Bridge",
             "city": "San Antonio",
@@ -191,7 +191,7 @@
           "properties": {
           "heading":"Some Things I've Experienced in South Texas",
           "name":"Alex Deleon",
-          "image":"./images/image11.jpg",
+          "image":"/images/image11.jpg",
           "info": "https://www.getcreativesanantonio.com/Public-Art/Public-Artworks-Map/Public-Artworks-List/Public-Artwork/Article/130/Some-Things-Ive-Experienced-in-South-Texas",
             "address": "600 Hemisfair Park",
             "city": "San Antonio",
@@ -211,7 +211,7 @@
           "properties": {
           "heading":"Canopy",
           "name":"Joey Fauerso",
-          "image":"./images/image12.jpg",
+          "image":"/images/image12.jpg",
           "info": "https://www.getcreativesanantonio.com/Public-Art/Public-Artworks-Map/Public-Artworks-List/Public-Artwork/Article/721/Canopy",
             "address": "729 Fulton Ave",
             "city": "San Antonio",
@@ -234,7 +234,7 @@
             "name":"ADRIANA M. GARCIA",
             "phoneFormatted": "(210) 354-3775",
             "address": "Between Santa Rosa Avenue and Martin Street",
-            "image":"./images/image13.jpg",
+            "image":"/images/image13.jpg",
             "info": "https://www.americansforthearts.org/by-program/networks-and-councils/public-art-network/public-art-year-in-review-database/de-todos-caminos-somos-todos-uno",
             "city": "San Antonio",
             "postalCode": "78210",
@@ -274,7 +274,7 @@
             "heading":"El Rey",
             "name":"Colton Valentine",
             "address": "4930 Rigsby Avenue",
-            "image":"./images/image15.jpg",
+            "image":"/images/image15.jpg",
             "info": "https://www.instagram.com/colton_valentine_/?hl=en",
             "city": "San Antonio",
             "postalCode": "78205",
@@ -294,7 +294,7 @@
             "heading":"Songbirds of San Antonio",
             "name":"Dixie Friend-Gay",
             "address": "4135 Thousand Oaks Dr",
-            "image":"./images/image16.jpg",
+            "image":"/images/image16.jpg",
             "info": "https://www.dixiefriendgay.com/gallery-san-antonio-songbirds",
             "city": "San Antonio",
             "postalCode": "78217",

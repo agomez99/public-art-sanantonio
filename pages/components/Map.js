@@ -9,24 +9,14 @@ mapboxgl.accessToken =
   const Popup = ({heading, name, image}) => (
     <div className="popup">
       <div className="route-metric-row">
-        <Image className="row-value" src={image} alt="location image"/>
+        <Image className="row-value" src={image} alt="location image"   width={50} height={50}/>
       </div>
       <p className="loc-heading"> {heading}</p>
       <p className="loc-artist"> Artist: {name}</p>
     </div>
   )
-/*   
-const Marker = ({ onClick, children, feature }) => {
-  const _onClick = () => {
-    onClick(feature.properties.description);
-  };
 
-  return (
-    <button onClick={_onClick} className="marker">
-      {children}
-    </button>
-  );
-}; */
+
 
 const Map = () => {
   const mapContainerRef = useRef(null);
@@ -85,6 +75,7 @@ const Map = () => {
         const feature = features[0]
         // create popup node
         const popupNode = document.createElement("div")
+
         ReactDOM.render(
           <Popup
             image={feature?.properties?.image}
@@ -106,7 +97,9 @@ const Map = () => {
     return () => map.remove();
   }, []);
 
-  return <div className="" ref={mapContainerRef} />;
+  return (
+  <div className="map-container" ref={mapContainerRef}/>
+  )
 };
 
 
