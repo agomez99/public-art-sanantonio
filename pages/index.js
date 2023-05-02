@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import Map from "./components/Map"
 const inter = Inter({ subsets: ['latin'] })
-import  ImageBox  from './components/ImageBox'
+//import  ImageBox  from './components/ImageBox'
 export default function Home() {
   return (
     <>
@@ -20,7 +20,7 @@ export default function Home() {
           <h1>Public Art San Antonio</h1>
         <div className="map-container">
           <Map/>
-          <ImageBox/>
+          {/* <ImageBox/> */}
         </div>
        
       </main>
