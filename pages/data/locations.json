@@ -254,7 +254,7 @@
             "heading":"The Last Parade",
             "name":"Rudy Herrera",
             "address": "229 E Houston St",
-            "image":"./images/image14.jpg",
+            "image":"/images/image14.jpg",
             "info": "#",
             "city": "San Antonio",
             "postalCode": "78205",

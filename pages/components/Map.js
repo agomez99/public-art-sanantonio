@@ -6,21 +6,37 @@ import Image from "next/image";
 mapboxgl.accessToken =
   "pk.eyJ1IjoiYWdvbWV6OTkiLCJhIjoiY2tjbWp1cjFqMDIyNjJ6bnNia2NhYXl1OCJ9.cMo6zH8dcAS-1g_nR9HjFQ";
 
-  const Popup = ({heading, name, image}) => (
-    <div className="popup">
-      <div className="route-metric-row">
-        <Image className="row-value" src={image} alt="location image"   width={50} height={50}/>
-      </div>
-      <p className="loc-heading"> {heading}</p>
-      <p className="loc-artist"> Artist: {name}</p>
+const Popup = ({ heading, name, image }) => (
+  <div className="popup">
+    <div className="route-metric-row">
+      <Image className="row-value" src={image} alt="location image" width={50} height={50} />
+    </div>
+    <p className="loc-heading"> {heading}</p>
+    <p className="loc-artist"> Artist: {name}</p>
+  </div>
+)
+
+const Images = () => {
+  return (
+    <div className="image-box-container">
+
+      {geoJson.features.map(({ properties: { image } }, index) => {
+        return (
+          <div key={index} className="image-box">
+            <Image src={image} className="image" alt="artist" width={200} height={200} />
+          </div>
+        )
+      }
+      )}
     </div>
   )
+}
 
-  const Images = ({image}) => {
-    return (
-      <Image className="row-value" src={image} alt="location image"   width={50} height={50}/>
-    )
-    }
+
+
+
+
+
 
 const Map = () => {
   const mapContainerRef = useRef(null);
@@ -45,7 +61,7 @@ const Map = () => {
         function (error, image) {
           if (error) throw error;
           map.addImage("custom-marker", image);
-          
+
           // Add a GeoJSON source with multiple points
           map.addSource("points", {
             type: "geojson",
@@ -72,7 +88,7 @@ const Map = () => {
       );
     });
 
-    
+
 
     // Add navigation control (the +/- zoom buttons)
     map.addControl(new mapboxgl.NavigationControl(), "top-right");
@@ -101,7 +117,7 @@ const Map = () => {
       }
     })
 
-      
+
 
 
 
@@ -111,7 +127,10 @@ const Map = () => {
   }, []);
 
   return (
-  <div className="map-container" ref={mapContainerRef}/>
+    <div>
+      <div className="map-container" ref={mapContainerRef} />
+      <Images />
+    </div>
   )
 };
 
