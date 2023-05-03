@@ -19,14 +19,14 @@ const Popup = ({ heading, name, image }) => (
 const Images = () => {
   return (
     <div className="image-box-container">
-
       {geoJson.features.map(({ properties: { image } }, index) => {
         return (
           <div key={index} className="image-box">
+          <a href="">
             <Image src={image} className="image" alt="artist" width={200} height={200} />
+            </a>
           </div>
-        )
-      }
+        ) }
       )}
     </div>
   )
@@ -96,6 +96,8 @@ const Map = () => {
       const features = map.queryRenderedFeatures(e.point, {
         layers: ["points"],
       })
+      //var id = e.features.properties.id;
+
       if (features.length > 0) {
         const feature = features[0]
         // create popup node
