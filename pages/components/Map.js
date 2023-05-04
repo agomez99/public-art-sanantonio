@@ -4,8 +4,8 @@ import ReactDOM from "react-dom";
 import geoJson from "../data/locations.json"
 import Image from "next/image";
 
-mapboxgl.accessToken =
-  "pk.eyJ1IjoiYWdvbWV6OTkiLCJhIjoiY2tjbWp1cjFqMDIyNjJ6bnNia2NhYXl1OCJ9.cMo6zH8dcAS-1g_nR9HjFQ";
+mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOXKEY;
+
 
 const Popup = ({ heading, name, image }) => (
   <div className="popup">
