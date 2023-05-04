@@ -8,53 +8,53 @@ import Navbar from '../components/Navbar'
 
 
 
-const Page = ({name, avatar}) => {
+const Page = ({ name, avatar }) => {
     console.log(name)
 
     const router = useRouter()
-  const { id } = router.query
+    const { id } = router.query
 
-  return (
-  <div>
-    <Navbar/>
+    return (
+        <div>
+            <Navbar />
 
-  <p>Post: {id}</p>
+            <p>Post: {id}</p>
 
-          <div className="image-box">
-          <p>{name} </p>
-          <Image src={avatar} width={300} height={300} alt="image" />
-          </div>
-       </div>
-)
+            <div className="image-box">
+                <p>{name} </p>
+                <Image src={avatar} width={300} height={300} alt="image" />
+            </div>
+        </div>
+    )
 }
 export async function getStaticPaths() {
     const categories = geoJson.features;
     const paths = categories.map(({ properties: { name, avatar } }) => ({
-      params: { slug: name, avatar }
+        params: { slug: name, avatar }
     }));
-  
+
     return {
-      paths,
-      fallback: false
+        paths,
+        fallback: false
     };
-  }
-  
-  export async function getStaticProps({ params }) {
+}
+
+export async function getStaticProps({ params }) {
     const categories = geoJson.features;
     const category = categories.find(
-      ({ properties: { name} }) => name === params.slug
+        ({ properties: { name } }) => name === params.slug
     );
-  
+
     return {
-      props: {
-        name: category.properties.name,
-        avatar: category.properties.avatar
+        props: {
+            name: category.properties.name,
+            avatar: category.properties.avatar
 
-      }
+        }
     };
-  }
+}
 
-  
+
 
 
 
