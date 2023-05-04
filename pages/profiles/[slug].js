@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import geoJson from '../data/locations.json'
 import Image from 'next/image'
 
-
+import Navbar from '../components/Navbar'
 
 
 
@@ -15,14 +15,16 @@ const Page = ({name, avatar}) => {
   const { id } = router.query
 
   return (
-  <>
+  <div>
+    <Navbar/>
+
   <p>Post: {id}</p>
 
           <div className="image-box">
           <p>{name} </p>
           <Image src={avatar} width={300} height={300} alt="image" />
           </div>
-       </>
+       </div>
 )
 }
 export async function getStaticPaths() {
