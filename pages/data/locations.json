@@ -71,6 +71,7 @@
           "properties": {
               "heading":"Crossroads of Enlightenment",
               "name":" Angel Rodríguez–Díaz",
+              "avatar":"/artist/Angel.jpg",
               "image":"/images/image5.jpg",
               "info": "https://www.getcreativesanantonio.com/Public-Art/Public-Artworks-Map/Public-Artworks-List/Public-Artwork/Article/380/Crossroads-of-Enlightenment",
             "address": "4400 Blanco Road ",
@@ -114,6 +115,7 @@
             "name": 
               "Collaboration",
             "image":"/images/image7.jpg",
+            "avatar":"/artist/andyyvette.jpg",
             "info": "https://www.getcreativesanantonio.com/Public-Art/Public-Artworks-Map/Public-Artworks-List/Public-Artwork/Article/779/Pioneers-of-the-Sky-The-Stinson-School-of-Flying",
             "address": "8410 Mission Road",
             "cc": "US",
@@ -134,6 +136,7 @@
           "properties": {
             "heading": "Powder",
             "name":"Daniel Eime",
+            "avatar":"/artist/Daniel.jpg",
             "image":"/images/image8.jpg",
             "info": "https://www.getcreativesanantonio.com/Public-Art/Public-Artworks-Map/Public-Artworks-List/Public-Artwork/Article/762/Powder",
             "address": "502 Burnet St",
@@ -154,6 +157,7 @@
           "properties": {
               "heading":"Red Bird",
               "name":"Michael Lance",
+              "avatar":"/artist/lance.jpg",
               "image":"/images/image9.jpg",
               "info": "https://www.getcreativesanantonio.com/Public-Art/Public-Artworks-Map/Public-Artworks-List/Public-Artwork/Article/284/Red-Bird",
             "address": "204 Augusta",
