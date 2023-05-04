@@ -1,5 +1,5 @@
 import mapboxgl from "mapbox-gl";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import ReactDOM from "react-dom";
 import geoJson from "../data/locations.json"
 import Image from "next/image";
@@ -41,12 +41,17 @@ const Images = () => {
 const Map = () => {
   const mapContainerRef = useRef(null);
   const popUpRef = useRef(new mapboxgl.Popup({ offset: 15 }))
+  const map = useRef(null);
 
+  const [lng, setLng] = useState(-70.9);
+  const [lat, setLat] = useState(42.35);
+  const [zoom, setZoom] = useState(9);
 
-
+ 
 
   // Initialize map when component mounts
   useEffect(() => {
+    
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
       style: "mapbox://styles/mapbox/streets-v11",
@@ -54,6 +59,9 @@ const Map = () => {
       zoom: 12,
     });
 
+
+
+    
     map.on("load", function () {
       // Add an image to use as a custom marker
       map.loadImage(
@@ -123,15 +131,32 @@ const Map = () => {
 
 
 
-
     // Clean up on unmount
     return () => map.remove();
   }, []);
 
+  useEffect(() => {
+    if (!map.current) return; // wait for map to initialize
+    map.current.on('move', () => {
+    setLng(map.current.getCenter().lng.toFixed(4));
+    setLat(map.current.getCenter().lat.toFixed(4));
+    setZoom(map.current.getZoom().toFixed(2));
+    });
+    });
+
+
   return (
     <div>
+        <div id="listings" />
+
+    <div className="sidebar">
+
+            Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+        </div>
       <div className="map-container" ref={mapContainerRef} />
       <Images />
+      <div>
+        </div>
     </div>
   )
 };

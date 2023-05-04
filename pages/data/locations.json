@@ -12,6 +12,7 @@
           "properties": {
            "heading":"La Veladora of Our Lady of Guadalupe ",
            "name":"Jesse Trevino",
+           "avatar":"/artist/Trevino.jpg",
            "image":"/images/image2.jpg",
            "info": "https://www.getcreativesanantonio.com/Public-Art/Public-Artworks-Map/Public-Artworks-List/Public-Artwork/Article/287/La-Veladora-of-Our-Lady-of-Guadalupe",
             "address": "1315 Guadalupe St",
@@ -31,6 +32,7 @@
           "properties": {
             "heading":"Dream Song Tower ",
             "name":"Ortiz Cruz",
+            "avatar":"/artist/cruz.jpg",
             "image":"/images/image3.jpg",
             "info" : "https://www.getcreativesanantonio.com/Public-Art/Public-Artworks-Map/Public-Artworks-List/Public-Artwork/Article/742/Dream-Song-Tower",
             "address": "Interstate 35 Access Rd & S Zarzamora St",
@@ -50,6 +52,7 @@
            "heading":"The Torch of Friendship",
            "info" : "https://www.getcreativesanantonio.com/Public-Art/Public-Artworks-Map/Public-Artworks-List/Public-Artwork/Article/165/Torch-of-Friendship-Antorcha-de-Amistad",
            "name":"Sebastián",
+           "avatar":"/artist/sebastian.jpg",
            "image":"/images/image4.jpg",
             "address": "333 Losoya Street",
             "city": "San Antonio",
@@ -87,7 +90,8 @@
           },
           "properties": {
             "heading":"Mosaic Murals on The River Walk",
-            "name":"Oscar Alvarado ",
+            "name":"Oscar Alvarado",
+            "avatar":"/artist/oscar.jpg",
             "image":"/images/image6.jpg",
             "info": "https://www.getcreativesanantonio.com/Public-Art/Public-Artworks-Map/Public-Artworks-List/Public-Artwork/Article/164/River-Walk-Mosaic-Murals",
             "address": "849 E Commerce",
@@ -169,7 +173,8 @@
           },
           "properties": {
            "heading":"Maverick Tile Mural",
-           "name":"Ethel Wilson Harris ",
+           "name":"Ethel Wilson Harris",
+           "avatar":"/artist/Ethel.jpg",
            "image":"/images/image10.jpg",
            "info": "https://www.getcreativesanantonio.com/Public-Art/Public-Artworks-Map/Public-Artworks-List/Public-Artwork/Article/160/Maverick-Tile-Mural",
             "address": "Riverwalk- North of Lexington St. Bridge",
@@ -191,6 +196,7 @@
           "properties": {
           "heading":"Some Things I've Experienced in South Texas",
           "name":"Alex Deleon",
+          "avatar":"/artist/alex.jpg",
           "image":"/images/image11.jpg",
           "info": "https://www.getcreativesanantonio.com/Public-Art/Public-Artworks-Map/Public-Artworks-List/Public-Artwork/Article/130/Some-Things-Ive-Experienced-in-South-Texas",
             "address": "600 Hemisfair Park",
@@ -211,6 +217,7 @@
           "properties": {
           "heading":"Canopy",
           "name":"Joey Fauerso",
+          "avatar":"/artist/fauerso.jpg",
           "image":"/images/image12.jpg",
           "info": "https://www.getcreativesanantonio.com/Public-Art/Public-Artworks-Map/Public-Artworks-List/Public-Artwork/Article/721/Canopy",
             "address": "729 Fulton Ave",
@@ -232,6 +239,7 @@
           "properties": {
             "heading":"De Todos Caminos Somos Todos Uno",
             "name":"ADRIANA M. GARCIA",
+            "avatar":"/artist/adriana.jpg",
             "phoneFormatted": "(210) 354-3775",
             "address": "Between Santa Rosa Avenue and Martin Street",
             "image":"/images/image13.jpg",
@@ -253,6 +261,7 @@
           "properties": {
             "heading":"The Last Parade",
             "name":"Rudy Herrera",
+            "avatar":"/artist/rudyH.jpg",
             "address": "229 E Houston St",
             "image":"/images/image14.jpg",
             "info": "#",
@@ -273,6 +282,7 @@
           "properties": {
             "heading":"El Rey",
             "name":"Colton Valentine",
+            "avatar":"/artist/Colton.jpg",
             "address": "4930 Rigsby Avenue",
             "image":"/images/image15.jpg",
             "info": "https://www.instagram.com/colton_valentine_/?hl=en",
@@ -293,6 +303,7 @@
           "properties": {
             "heading":"Songbirds of San Antonio",
             "name":"Dixie Friend-Gay",
+            "avatar":"/artist/gay.jpg",
             "address": "4135 Thousand Oaks Dr",
             "image":"/images/image16.jpg",
             "info": "https://www.dixiefriendgay.com/gallery-san-antonio-songbirds",
