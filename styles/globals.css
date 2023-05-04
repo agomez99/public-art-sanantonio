@@ -93,6 +93,17 @@ a {
   text-decoration: none;
 }
 
+.image-container {
+  width: 50%;
+}
+
+  .banner {
+    object-fit: contain;
+    width: 100% !important;
+    position: relative !important;
+    height: unset !important;
+
+  }
 
 
 .map-container{
@@ -118,5 +129,11 @@ a {
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .image-container {
+    width: 90%;
   }
 }

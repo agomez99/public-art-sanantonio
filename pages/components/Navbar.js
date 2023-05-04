@@ -27,7 +27,7 @@ function Navbar() {
       <p className="text-center mt-4 mb-4">Or right-aligned</p> */}
       <Nav className="justify-content-end" activeKey="/home">
         <Nav.Item>
-          <Nav.Link href="/home">Home</Nav.Link>
+          <Nav.Link href="/">Home</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link href="/artist">Artist</Nav.Link>

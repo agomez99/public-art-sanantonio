@@ -3,6 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import ReactDOM from "react-dom";
 import geoJson from "../data/locations.json"
 import Image from "next/image";
+
 mapboxgl.accessToken =
   "pk.eyJ1IjoiYWdvbWV6OTkiLCJhIjoiY2tjbWp1cjFqMDIyNjJ6bnNia2NhYXl1OCJ9.cMo6zH8dcAS-1g_nR9HjFQ";
 
@@ -33,11 +34,6 @@ const Images = () => {
 }
 
 
-
-
-
-
-
 const Map = () => {
   const mapContainerRef = useRef(null);
   const popUpRef = useRef(new mapboxgl.Popup({ offset: 15 }))
@@ -47,7 +43,8 @@ const Map = () => {
   const [lat, setLat] = useState(42.35);
   const [zoom, setZoom] = useState(9);
 
- 
+
+
 
   // Initialize map when component mounts
   useEffect(() => {
