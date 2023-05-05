@@ -5,7 +5,7 @@ export default function artist() {
   return (
     <div>
     <Navbar/>
-    Artists List
+    <h1 className='artist-header'>Artists Index</h1>
       <Artists/>
       </div>
   )
