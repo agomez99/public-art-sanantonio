@@ -170,14 +170,21 @@ const Map = () => {
       map.getCanvas().style.cursor = "pointer";
     });
 
-    map.on("mouseleave", ["points", "star"], function () {
+/*     map.on("mouseleave", ["points", "star"], function () {
       map.getCanvas().style.cursor = "";
       popUpRef.current.remove();
     });
-
+ */
     map.on("click", ["points", "star"], function (e) {
       const layer = e.features[0].layer.id;
       handlePopup(e, [layer]);
+      map.flyTo({
+        
+        center: e.lngLat, 
+        zoom: 15,
+        essential: true
+      });
+
     });
 
     map.on("mousemove", ["points", "star"], function (e) {
