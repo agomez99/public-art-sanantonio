@@ -1,0 +1,80 @@
+{
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -98.48612044232871,
+                    29.426359577566828
+                ]
+            },
+            "properties": {
+                "heading": "The Alamo ",
+                "name": "The Alamo",
+                "image": "/images/alamo.jpg",
+                "info": "https://www.thealamo.org/",
+                "address": "1471 P St NW",
+                "crossStreet": "at 15th St NW",
+                "postalCode": "20005"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -98.482147,
+                    29.437281
+                ]
+            },
+            "properties": {
+                "heading": "Art Museum ",
+                "name": "San Antonio Museum of Art",
+                "image": "/images/SAMA.jpg",
+                "info": "https://www.samuseum.org/",
+                " address": " 200 W Jones Ave",
+                "crossStreet": "at 22nd St NW",
+                "postalCode": "78215"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -98.45709579999983,
+                    29.486352521862464
+                ]
+            },
+            "properties": {
+                "heading": "Art Museum ",
+                "name": "McNay Art Muesum",
+                "image": "/images/mcknay.jpg",
+                "info": "https://www.mcnayart.org/",
+                " address": " 6000 N New Braunfels Ave",
+                "crossStreet": "at Dupont Circle",
+                "postalCode": "78209"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -98.49516626931181,
+                    29.409368146898036
+                ]
+            },
+            "properties": {
+                "heading": "Art Museum ",
+                "name": "Blue Star Contemporary",
+                "image": "/images/bluestar.jpg",
+                "info": "https://bluestarcontemporary.org/",
+                " address": " 116 Blue Star,",
+                "crossStreet": "at Dupont Circle",
+                "postalCode": "78204"
+            }
+        }
+    ]
+}

@@ -2,6 +2,7 @@ import mapboxgl from "mapbox-gl";
 import React, { useEffect, useState, useRef } from "react";
 import ReactDOM from "react-dom";
 import geoJson from "../data/locations.json"
+import otherlocations from "../data/otherlocations.json"
 import Image from "next/image";
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOXKEY;
@@ -38,11 +39,6 @@ const Map = () => {
   const mapContainerRef = useRef(null);
   const popUpRef = useRef(new mapboxgl.Popup({ offset: 15 }))
   const map = useRef(null);
-
-  const [lng, setLng] = useState(-70.9);
-  const [lat, setLat] = useState(42.35);
-  const [zoom, setZoom] = useState(9);
-
 
 
 
@@ -94,12 +90,50 @@ const Map = () => {
     });
 
 
+    map.on("load", function () {
+      // Add an image to use as a custom marker
+      map.loadImage(
+        "/images/star.png",
+        function (error, stars) {
+          if (error) throw error;
+          map.addImage("local-marker", stars);
+          // Add a GeoJSON source with multiple points
+          map.addSource("star", {
+            type: "geojson",
+            data: {
+              type: "FeatureCollection",
+              features: otherlocations.features,
+            },
+          });
+          // Add a symbol layer
+          map.addLayer({
+            id: "star",
+            type: "symbol",
+            source: "star",
+            layout: {
+              "icon-image": "local-marker",
+              // get the title name from the source's "title" property
+              "text-field": ["get", "title"],
+              "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+              "text-offset": [0, 1.25],
+              "text-anchor": "top",
+            },
+          });
+        }
+      );
+    });
+
+
+
+
+
+
 
     // Add navigation control (the +/- zoom buttons)
     map.addControl(new mapboxgl.NavigationControl(), "top-right");
     map.on("click", e => {
       const features = map.queryRenderedFeatures(e.point, {
-        layers: ["points"],
+        layers: ["points","star"],
       })
       //var id = e.features.properties.id;
 
@@ -125,31 +159,14 @@ const Map = () => {
     })
 
 
-
-
-
     // Clean up on unmount
     return () => map.remove();
   }, []);
-
-  useEffect(() => {
-    if (!map.current) return; // wait for map to initialize
-    map.current.on('move', () => {
-    setLng(map.current.getCenter().lng.toFixed(4));
-    setLat(map.current.getCenter().lat.toFixed(4));
-    setZoom(map.current.getZoom().toFixed(2));
-    });
-    });
 
 
   return (
     <div>
         <div id="listings" />
-
-    <div className="sidebar">
-
-            Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
-        </div>
       <div className="map-container" ref={mapContainerRef} />
       <Images />
       <div>
