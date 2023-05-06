@@ -125,7 +125,14 @@ a {
   vertical-align: middle;
 }
 
+.image-list-container{
+  display: flex;
+  flex-wrap: wrap;
+}
 
+.image-list{
+
+}
 .artist-header{
   text-align: center;
   margin-bottom: 5%;

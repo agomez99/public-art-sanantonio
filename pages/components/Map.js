@@ -1,9 +1,14 @@
 import mapboxgl from "mapbox-gl";
 import React, { useEffect, useState, useRef } from "react";
 import ReactDOM from "react-dom";
+import { hydrate } from 'react-dom';
+
 import geoJson from "../data/locations.json"
 import otherlocations from "../data/otherlocations.json"
 import Image from "next/image";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOXKEY;
 
@@ -12,7 +17,9 @@ const Popup = ({ heading, name, image }) => (
   <div className="popup-container">
     <p className="loc-heading"> {heading}</p>
     <div className="popup" id="popupId">
+    <a href="">
       <Image className="loc-image" src={image} alt="location image" width={70} height={70} />
+      </a>
     </div>
     <p className="loc-artist"> By: {name}</p>
 
@@ -26,7 +33,7 @@ const Images = () => {
         return (
           <div key={index} className="image-box">
             <a href="">
-              <Image src={image} className="image" alt="artist" width={200} height={200} />
+              <Image src={image} className="image-list" alt="artist" width={200} height={200} />
             </a>
           </div>
         )
@@ -40,11 +47,12 @@ const ImageList = () => {
   return (
 
     <div className="image-list-container">
-      {geoJson.features.map(({ properties: { image } }, index) => {
+      {geoJson.features.map(({ properties: { image, heading } }, index) => {
         return (
           <div key={index} className="image-list">
-            <a href="#popId">
-              <Image src={image} className="image" alt="artist" width={200} height={200} />
+            <a href="">
+              {/* <p>{heading}</p> */}
+              <Image src={image}  alt="featured-image" className="image"  width={50} height={50} />
             </a>
           </div>
         )
@@ -58,6 +66,15 @@ const Map = () => {
   const mapContainerRef = useRef(null);
   const popUpRef = useRef(new mapboxgl.Popup({ offset: 15 }))
   const map = useRef(null);
+  const [lng] = useState(-98.48612044232871);
+  const [lat] = useState(29.426359577566828);
+  const [zoom, setZoom] = useState(12);
+
+  const [artistheading, setHeading] = useState([geoJson.features[0].properties.heading])
+  const [artistname, setName] = useState( [geoJson.features[0].properties.name])
+  const [artistImage, setImage] = useState([geoJson.features[0].properties.image])
+  const[addressLocation,  setAddressLocation] = useState([geoJson.features[0].properties.address])
+  
 
   // Initialize map when component mounts
   useEffect(() => {
@@ -65,9 +82,10 @@ const Map = () => {
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
       style: "mapbox://styles/mapbox/streets-v11",
-      center: [-98.48612044232871, 29.426359577566828],
-      zoom: 12,
+      center: [lng, lat],
+      zoom: zoom,
     });
+
 
     map.on("load", function () {
       // Add an image to use as a custom marker
@@ -170,23 +188,32 @@ const Map = () => {
       map.getCanvas().style.cursor = "pointer";
     });
 
-/*     map.on("mouseleave", ["points", "star"], function () {
+    map.on("mouseleave", ["points", "star"], function () {
       map.getCanvas().style.cursor = "";
       popUpRef.current.remove();
-    });
- */
+    })
+
     map.on("click", ["points", "star"], function (e) {
       const layer = e.features[0].layer.id;
       handlePopup(e, [layer]);
       map.flyTo({
-        
-        center: e.lngLat, 
+
+        center: e.lngLat,
         zoom: 15,
         essential: true
       });
 
     });
 
+
+    map.on("click", ["points",  "star"], function (e) {
+      setName(e.features[0].properties.name);
+      setImage(e.features[0].properties.image);
+      setHeading(e.features[0].properties.heading);
+      setAddressLocation(e.features[0].properties.address);
+ 
+
+    })
     map.on("mousemove", ["points", "star"], function (e) {
       const layer = e.features[0].layer.id;
       const features = map.queryRenderedFeatures(e.point, {
@@ -228,13 +255,33 @@ const Map = () => {
   }, []);
 
   return (
-    <div>
+
+
+    <Container>
       <ImageList />
-      <div className="map-container" ref={mapContainerRef} />
-      <Images />
-      <div>
-      </div>
-    </div>
+
+      {/* <Images /> */}
+      <Row>
+        <Col md={8}>
+          <div className="map-container" ref={mapContainerRef} />
+        </Col>
+        <Col sm={4}>
+          <div className="sidebar">
+            <p> {artistname} </p>
+            <p> {artistheading} </p>
+            <p> Address: {addressLocation} </p>
+            <a href=" ">
+            <img src={artistImage} className="display-image" alt="featured-image" width={400} height={400} />
+          </a>
+          </div>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+
+        </Col>
+      </Row>
+    </Container>
   )
 };
 
