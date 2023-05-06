@@ -9,12 +9,13 @@ mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOXKEY;
 
 
 const Popup = ({ heading, name, image }) => (
-  <div className="popup">
-    <div className="route-metric-row">
-      <Image className="row-value" src={image} alt="location image" width={50} height={50} />
-    </div>
+  <div className="popup-container">
     <p className="loc-heading"> {heading}</p>
-    <p className="loc-artist"> Artist: {name}</p>
+    <div className="popup" id="popupId">
+      <Image className="loc-image" src={image} alt="location image" width={70} height={70} />
+    </div>
+    <p className="loc-artist"> By: {name}</p>
+
   </div>
 )
 
@@ -24,27 +25,43 @@ const Images = () => {
       {geoJson.features.map(({ properties: { image } }, index) => {
         return (
           <div key={index} className="image-box">
-          <a href="">
-            <Image src={image} className="image" alt="artist" width={200} height={200} />
+            <a href="">
+              <Image src={image} className="image" alt="artist" width={200} height={200} />
             </a>
           </div>
-        ) }
+        )
+      }
       )}
     </div>
   )
 }
+const ImageList = () => {
 
+  return (
+
+    <div className="image-list-container">
+      {geoJson.features.map(({ properties: { image } }, index) => {
+        return (
+          <div key={index} className="image-list">
+            <a href="#popId">
+              <Image src={image} className="image" alt="artist" width={200} height={200} />
+            </a>
+          </div>
+        )
+      }
+      )}
+    </div>
+  )
+}
 
 const Map = () => {
   const mapContainerRef = useRef(null);
   const popUpRef = useRef(new mapboxgl.Popup({ offset: 15 }))
   const map = useRef(null);
 
-
-
   // Initialize map when component mounts
   useEffect(() => {
-    
+
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
       style: "mapbox://styles/mapbox/streets-v11",
@@ -52,9 +69,6 @@ const Map = () => {
       zoom: 12,
     });
 
-
-
-    
     map.on("load", function () {
       // Add an image to use as a custom marker
       map.loadImage(
@@ -125,52 +139,94 @@ const Map = () => {
 
 
 
-
-
-
-
     // Add navigation control (the +/- zoom buttons)
     map.addControl(new mapboxgl.NavigationControl(), "top-right");
-    map.on("click", e => {
+
+    function handlePopup(e, layers) {
       const features = map.queryRenderedFeatures(e.point, {
-        layers: ["points","star"],
-      })
-      //var id = e.features.properties.id;
+        layers,
+      });
 
       if (features.length > 0) {
-        const feature = features[0]
-        // create popup node
-        const popupNode = document.createElement("div")
+        const feature = features[0];
+        const popupNode = document.createElement("div");
 
         ReactDOM.render(
           <Popup
             image={feature?.properties?.image}
             heading={feature?.properties?.heading}
             name={feature?.properties?.name}
-
           />,
           popupNode
-        )
+        );
         popUpRef.current
           .setLngLat(e.lngLat)
           .setDOMContent(popupNode)
-          .addTo(map)
+          .addTo(map);
       }
-    })
+    }
 
+    map.on("mouseenter", ["points", "star"], function () {
+      map.getCanvas().style.cursor = "pointer";
+    });
 
-    // Clean up on unmount
+    map.on("mouseleave", ["points", "star"], function () {
+      map.getCanvas().style.cursor = "";
+      popUpRef.current.remove();
+    });
+
+    map.on("click", ["points", "star"], function (e) {
+      const layer = e.features[0].layer.id;
+      handlePopup(e, [layer]);
+    });
+
+    map.on("mousemove", ["points", "star"], function (e) {
+      const layer = e.features[0].layer.id;
+      const features = map.queryRenderedFeatures(e.point, {
+        layers: [layer],
+      });
+
+      if (features.length > 0) {
+        const feature = features[0];
+        map.getCanvas().style.cursor = "pointer";
+
+        const coordinates = feature.geometry.coordinates.slice();
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        // create popup node
+        const popupNode = document.createElement("div");
+
+        ReactDOM.render(
+          <Popup
+            image={feature?.properties?.image}
+            heading={feature?.properties?.heading}
+            name={feature?.properties?.name}
+          />,
+          popupNode
+        );
+
+        popUpRef.current
+          .setLngLat(e.lngLat)
+          .setDOMContent(popupNode)
+          .addTo(map);
+      } else {
+        map.getCanvas().style.cursor = popUpRef.current.remove();
+      }
+    });
+
     return () => map.remove();
-  }, []);
 
+  }, []);
 
   return (
     <div>
-        <div id="listings" />
+      <ImageList />
       <div className="map-container" ref={mapContainerRef} />
       <Images />
       <div>
-        </div>
+      </div>
     </div>
   )
 };

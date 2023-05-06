@@ -151,7 +151,29 @@ a {
 
 }
 
+.popup{
+  display: flex;
+  justify-content: center;
+}
 
+
+
+.popup-container{
+  border-style: solid;
+  border-width: 5px;
+}
+
+
+.mapboxgl-popup-close-button{
+  font-size: 3rem;
+  color:red;
+}
+.loc-artist{
+  text-align: center;
+}
+.loc-heading{
+  text-align: center;
+}
 
 .bio-name{
   font-size: 2.2rem;
