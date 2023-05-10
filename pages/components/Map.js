@@ -1,8 +1,6 @@
 import mapboxgl from "mapbox-gl";
 import React, { useEffect, useState, useRef } from "react";
 import ReactDOM from "react-dom";
-import { hydrate } from 'react-dom';
-
 import geoJson from "../data/locations.json"
 import otherlocations from "../data/otherlocations.json"
 import Image from "next/image";
@@ -25,11 +23,11 @@ const Popup = ({ heading, name, image }) => (
 
   </div>
 )
-
+/* 
 const Images = () => {
   return (
     <div className="image-box-container">
-      {geoJson.features.map(({ properties: { image } }, index) => {
+      {geoJson.features.map(({ properties: { image} }, index) => {
         return (
           <div key={index} className="image-box">
             <a href="">
@@ -47,11 +45,11 @@ const ImageList = () => {
   return (
 
     <div className="image-list-container">
-      {geoJson.features.map(({ properties: { image, heading } }, index) => {
+      {geoJson.features.map(({ properties: { image, name } }, index) => {
         return (
           <div key={index} className="image-list">
-            <a href="">
-              {/* <p>{heading}</p> */}
+            <a onClick={() => handleSelectLocation(location)}>
+            {name}
               <Image src={image}  alt="featured-image" className="image"  width={50} height={50} />
             </a>
           </div>
@@ -60,7 +58,7 @@ const ImageList = () => {
       )}
     </div>
   )
-}
+} */
 
 const Map = () => {
   const mapContainerRef = useRef(null);
@@ -75,6 +73,44 @@ const Map = () => {
   const [artistImage, setImage] = useState([geoJson.features[0].properties.image])
   const[addressLocation,  setAddressLocation] = useState([geoJson.features[0].properties.address])
   
+  const [selectedLocation, setSelectedLocation] = useState({
+    name: "",
+    latitude: lat,
+    longitude: lng,
+  });
+  
+/*   useEffect(() => {
+    if (map.current) {
+      map.current.flyTo({
+        center: selectedLocation,
+        zoom: 10,
+      });
+    }
+  }, [selectedLocation]);
+ */
+
+  const handleSelectLocation = (geoJson) => {
+    const {coordinates} =  geoJson.geometry;
+    const {heading, name, image, address, description} = geoJson.properties;
+  
+    setZoom(15);
+    setHeading([heading])
+    setName([name])
+    setImage([image])
+    setAddressLocation([address])
+  
+    setSelectedLocation({
+      name,
+      latitude: coordinates[1],
+      longitude: coordinates[0],
+      heading,
+      image,
+      address,
+      description,
+    });
+
+  };
+
 
   // Initialize map when component mounts
   useEffect(() => {
@@ -252,16 +288,25 @@ const Map = () => {
 
     return () => map.remove();
 
-  }, []);
+  }, 
+  
+  
+  []);
 
   return (
 
 
     <Container>
-      <ImageList />
 
-      {/* <Images /> */}
       <Row>
+      <h1>Locations</h1>
+      <div className="image-box-container">
+        {geoJson.features.map((name, index) => (
+          <ul key={index} onClick={() => handleSelectLocation(name)}>
+            <Image src={geoJson.features[index].properties.image} width={100} height={100} alt="location-image"  className="image-list" />
+          </ul>
+        ))}
+      </div>
         <Col md={8}>
           <div className="map-container" ref={mapContainerRef} />
         </Col>
@@ -274,6 +319,7 @@ const Map = () => {
             <img src={artistImage} className="display-image" alt="featured-image" width={400} height={400} />
           </a>
           </div>
+          
         </Col>
       </Row>
       <Row>
