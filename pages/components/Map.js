@@ -7,6 +7,7 @@ import Image from "next/image";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOXKEY;
 
@@ -15,8 +16,8 @@ const Popup = ({ heading, name, image }) => (
   <div className="popup-container">
     <p className="loc-heading"> {heading}</p>
     <div className="popup" id="popupId">
-    <a href="">
-      <Image className="loc-image" src={image} alt="location image" width={70} height={70} />
+      <a href="">
+        <Image className="loc-image" src={image} alt="location image" width={70} height={70} />
       </a>
     </div>
     <p className="loc-artist"> By: {name}</p>
@@ -69,36 +70,39 @@ const Map = () => {
   const [zoom, setZoom] = useState(12);
 
   const [artistheading, setHeading] = useState([geoJson.features[0].properties.heading])
-  const [artistname, setName] = useState( [geoJson.features[0].properties.name])
+  const [artistname, setName] = useState([geoJson.features[0].properties.name])
   const [artistImage, setImage] = useState([geoJson.features[0].properties.image])
-  const[addressLocation,  setAddressLocation] = useState([geoJson.features[0].properties.address])
-  
+  const [addressLocation, setAddressLocation] = useState([geoJson.features[0].properties.address])
+
+  const [expanded, setExpanded] = useState(false)
+  const dataForDisplay = expanded ? geoJson.features : geoJson.features.slice(0, 10)
+
   const [selectedLocation, setSelectedLocation] = useState({
     name: "",
     latitude: lat,
     longitude: lng,
   });
-  
-/*   useEffect(() => {
-    if (map.current) {
-      map.current.flyTo({
-        center: selectedLocation,
-        zoom: 10,
-      });
-    }
-  }, [selectedLocation]);
- */
+
+  /*   useEffect(() => {
+      if (map.current) {
+        map.current.flyTo({
+          center: selectedLocation,
+          zoom: 10,
+        });
+      }
+    }, [selectedLocation]);
+   */
 
   const handleSelectLocation = (geoJson) => {
-    const {coordinates} =  geoJson.geometry;
-    const {heading, name, image, address, description} = geoJson.properties;
-  
+    const { coordinates } = geoJson.geometry;
+    const { heading, name, image, address, description } = geoJson.properties;
+
     setZoom(15);
     setHeading([heading])
     setName([name])
     setImage([image])
     setAddressLocation([address])
-  
+
     setSelectedLocation({
       name,
       latitude: coordinates[1],
@@ -242,12 +246,12 @@ const Map = () => {
     });
 
 
-    map.on("click", ["points",  "star"], function (e) {
+    map.on("click", ["points", "star"], function (e) {
       setName(e.features[0].properties.name);
       setImage(e.features[0].properties.image);
       setHeading(e.features[0].properties.heading);
       setAddressLocation(e.features[0].properties.address);
- 
+
 
     })
     map.on("mousemove", ["points", "star"], function (e) {
@@ -288,38 +292,59 @@ const Map = () => {
 
     return () => map.remove();
 
-  }, 
-  
-  
-  []);
+  },
+
+
+    []);
 
   return (
 
 
     <Container>
+      <style type="text/css">
+        {`
+    .btn-flat {
+      background-color: purple;
+      color: white;
+      margin-bottom: 1rem;
+      width:50%;
+    }
 
-      <Row>
-      <h1>Locations</h1>
-      <div className="image-box-container">
-        {geoJson.features.map((name, index) => (
-          <ul key={index} onClick={() => handleSelectLocation(name)}>
-            <Image src={geoJson.features[index].properties.image} width={100} height={100} alt="location-image"  className="image-list" />
-          </ul>
-        ))}
-      </div>
+    .btn-xxl {
+      font-size: 1.5rem;
+    }
+    `}
+
+      </style>
+      <Row className="text-center" >
+        <h1>Locations</h1>
+        <div className="image-box-container">
+          {dataForDisplay.map((name, index) => (
+            <ul key={index} onClick={() => handleSelectLocation(name)}>
+              <Image src={geoJson.features[index].properties.image} width={100} height={100} alt="location-image" className="image-list" />
+            </ul>
+          ))}
+
+        </div>
+        <div className="text-center" >
+        <Button type="button" onClick={() => setExpanded(!expanded)} variant="flat" size="xxl" >
+          {expanded ? 'show less' : 'show more'}
+        </Button>
+        </div>
         <Col md={8}>
           <div className="map-container" ref={mapContainerRef} />
         </Col>
         <Col sm={4}>
           <div className="sidebar">
-          <a href={`/profiles/${artistname}`} ><h1> {artistname} </h1></a>
+            <a href={`/profiles/${artistname}`} ><h1> {artistname} </h1>
+            </a>
             <p> {artistheading} </p>
             <p> Address: {addressLocation} </p>
             <a href=" ">
-            <img src={artistImage} className="display-image" alt="featured-image" width={400} height={400} />
-          </a>
+              <img src={artistImage} className="display-image" alt="featured-image" width={400} height={400} />
+            </a>
           </div>
-          
+
         </Col>
       </Row>
       <Row>
