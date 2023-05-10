@@ -312,7 +312,7 @@ const Map = () => {
         </Col>
         <Col sm={4}>
           <div className="sidebar">
-            <p> {artistname} </p>
+          <a href={`/profiles/${artistname}`} ><h1> {artistname} </h1></a>
             <p> {artistheading} </p>
             <p> Address: {addressLocation} </p>
             <a href=" ">
