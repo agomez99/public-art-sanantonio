@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import mapboxgl from "mapbox-gl";
 import React, { useEffect, useState, useRef } from "react";
 import ReactDOM from "react-dom";
@@ -8,6 +9,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import { ArrowDown, ArrowUp} from 'react-bootstrap-icons';
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOXKEY;
 
@@ -21,45 +23,8 @@ const Popup = ({ heading, name, image }) => (
       </a>
     </div>
     <p className="loc-artist"> By: {name}</p>
-
   </div>
 )
-/* 
-const Images = () => {
-  return (
-    <div className="image-box-container">
-      {geoJson.features.map(({ properties: { image} }, index) => {
-        return (
-          <div key={index} className="image-box">
-            <a href="">
-              <Image src={image} className="image-list" alt="artist" width={200} height={200} />
-            </a>
-          </div>
-        )
-      }
-      )}
-    </div>
-  )
-}
-const ImageList = () => {
-
-  return (
-
-    <div className="image-list-container">
-      {geoJson.features.map(({ properties: { image, name } }, index) => {
-        return (
-          <div key={index} className="image-list">
-            <a onClick={() => handleSelectLocation(location)}>
-            {name}
-              <Image src={image}  alt="featured-image" className="image"  width={50} height={50} />
-            </a>
-          </div>
-        )
-      }
-      )}
-    </div>
-  )
-} */
 
 const Map = () => {
   const mapContainerRef = useRef(null);
@@ -75,7 +40,7 @@ const Map = () => {
   const [addressLocation, setAddressLocation] = useState([geoJson.features[0].properties.address])
 
   const [expanded, setExpanded] = useState(false)
-  const dataForDisplay = expanded ? geoJson.features : geoJson.features.slice(0, 10)
+  const dataForDisplay = expanded ? geoJson.features : geoJson.features.slice(0, 9)
 
   const [selectedLocation, setSelectedLocation] = useState({
     name: "",
@@ -304,12 +269,18 @@ const Map = () => {
       <style type="text/css">
         {`
     .btn-flat {
-      background-color: purple;
+      background-color: #372545;
       color: white;
       margin-bottom: 1rem;
       width:50%;
     }
-
+    .btn-flat:hover {
+      background-color: white;
+      color:  #372545;
+      margin-bottom: 1rem;
+      width:50%;
+      border: 1px solid #372545;
+    }
     .btn-xxl {
       font-size: 1.5rem;
     }
@@ -321,26 +292,40 @@ const Map = () => {
         <div className="image-box-container">
           {dataForDisplay.map((name, index) => (
             <ul key={index} onClick={() => handleSelectLocation(name)}>
+            <a  href="#side">
               <Image src={geoJson.features[index].properties.image} width={100} height={100} alt="location-image" className="image-list" />
+              </a>
             </ul>
           ))}
 
         </div>
         <div className="text-center" >
-        <Button type="button" onClick={() => setExpanded(!expanded)} variant="flat" size="xxl" >
-          {expanded ? 'show less' : 'show more'}
-        </Button>
+          <Button type="button" onClick={() => setExpanded(!expanded)} variant="flat" size="xxl" >
+            {expanded ?
+              (
+                <>
+                  <ArrowUp /> show less 
+                </>
+              )
+              :
+              (
+                <>
+                  <ArrowDown />show more   
+                </>
+              )
+            }
+          </Button>
         </div>
         <Col md={8}>
           <div className="map-container" ref={mapContainerRef} />
         </Col>
         <Col sm={4}>
-          <div className="sidebar">
+          <div className="sidebar" id="side">
             <a href={`/profiles/${artistname}`} ><h1> {artistname} </h1>
             </a>
             <p> {artistheading} </p>
-            <p> Address: {addressLocation} </p>
-            <a href=" ">
+            <p> Location: {addressLocation} </p>
+            <a >
               <img src={artistImage} className="display-image" alt="featured-image" width={400} height={400} />
             </a>
           </div>
