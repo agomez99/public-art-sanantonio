@@ -9,7 +9,7 @@ import Col from 'react-bootstrap/Col';
 
 
 
-const Page = ({ name, avatar, image, heading }) => {
+const Page = ({ name, avatar, image, heading, about }) => {
     console.log(name)
     const router = useRouter()
     const { id } = router.query
@@ -21,11 +21,7 @@ const Page = ({ name, avatar, image, heading }) => {
                 <Row>
                     <Col md={8}>
                         <h1 className='bio-name'>{name}</h1>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,
-                            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                            It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                            and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+                        <p>{about}</p>
                     </Col>
 
                     <Col sm={4}>
@@ -47,8 +43,8 @@ const Page = ({ name, avatar, image, heading }) => {
 }
 export async function getStaticPaths() {
     const categories = geoJson.features;
-    const paths = categories.map(({ properties: { name, avatar, image, heading } }) => ({
-        params: { slug: name, avatar, image, heading }
+    const paths = categories.map(({ properties: { name, avatar, image, heading, about } }) => ({
+        params: { slug: name, avatar, image, heading, about }
     }));
 
     return {
@@ -68,7 +64,8 @@ export async function getStaticProps({ params }) {
             name: category.properties.name,
             avatar: category.properties.avatar,
             image: category.properties.image,
-            heading: category.properties.heading
+            heading: category.properties.heading,
+            about: category.properties.about
 
         }
     };
