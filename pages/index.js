@@ -15,11 +15,12 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta charset="utf-8" />
        <meta name="viewport" content="width=device-width, initial-scale=1" />
+       
       </Head>
       <Navbar/>
 
       <main className={`${styles.main}`}>
-          <h1>Public Art San Antonio</h1>
+          <h1 className='banner-txt'>Public Art San Antonio</h1>
           <div  className='image-container'>
           <Image src="/images/Banner.png" alt="banner" className= "banner" width={700} height={200} />
           </div>
