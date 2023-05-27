@@ -21,7 +21,7 @@ const Page = ({ name, avatar, image, heading, about }) => {
                 <Row>
                     <Col md={8}>
                         <h1 className='bio-name'>{name}</h1>
-                        <p>{about}</p>
+                        <p className='bio-about'>{about}</p>
                     </Col>
 
                     <Col sm={4}>
@@ -33,7 +33,7 @@ const Page = ({ name, avatar, image, heading, about }) => {
                 <Row>
                     <Col>
                         <Image src={image} width={200} height={200} alt="image" className='art-image' />
-                        <p>{heading}</p>
+                        <p className='artbio-heading'>{heading}</p>
                     </Col>
                 </Row>
             </Container>
@@ -41,10 +41,11 @@ const Page = ({ name, avatar, image, heading, about }) => {
         </div>
     )
 }
+
 export async function getStaticPaths() {
     const categories = geoJson.features;
-    const paths = categories.map(({ properties: { name, avatar, image, heading, about } }) => ({
-        params: { slug: name, avatar, image, heading, about }
+    const paths = categories.map(({ properties: { name } }) => ({
+        params: { slug: name }
     }));
 
     return {
@@ -66,12 +67,9 @@ export async function getStaticProps({ params }) {
             image: category.properties.image,
             heading: category.properties.heading,
             about: category.properties.about
-
         }
     };
 }
-
-
 
 
 

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed&display=swap');
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
@@ -87,21 +88,33 @@ body {
 
 a.nav-link{
   font-size: 1.5rem;
+  text-decoration: none;
+  color: #372545;
+
 }
 a {
   color: inherit;
   text-decoration: none;
 }
 
+
 .image-container {
   width: 50%;
+  position: relative;
+  text-align: center;
+
 }
 
   .banner {
     object-fit: contain;
     width: 100% !important;
     position: relative !important;
-    height: unset !important;
+    height:200px;
+  }
+  .banner-txt{
+    font-family: 'Fira Sans Extra Condensed', sans-serif;
+    font-size: 5rem;
+    color: #372545;
 
   }
 
@@ -114,6 +127,11 @@ a {
 .image-box-container{
   display: flex;
   flex-wrap: wrap;
+
+}
+div.image-box-container{
+  margin-top:1%;
+
 }
 .image-box{
   padding: 5px;
@@ -128,8 +146,11 @@ a {
 .image-list-container{
   display: flex;
   flex-wrap: wrap;
+  
 }
-
+.image-list{
+  border-radius: 5%;
+}
 .image-list:hover{
   transform: scale(1.3);
 }
@@ -142,12 +163,21 @@ a {
   flex-wrap: wrap;
   align-content: center;
 }
+h2.artlink{
+  text-decoration: none;
+  color: black;
+}
+
+a:link { text-decoration: none; }
+
 
 .artist-image{
   border-radius: 45%;
   padding:5%;
 }
-
+.display-image{
+  border-radius: 5%;
+}
 .name-text{
   text-align: center;
 }
@@ -177,13 +207,23 @@ a {
 
 .bio-name{
   font-size: 2.2rem;
-}
+  font-family: 'Fira Sans Extra Condensed', sans-serif;
 
+}
+.bio-about{
+  font-size: 2rem;
+  font-family: 'Fira Sans Extra Condensed', sans-serif;
+
+
+}
 .bio-image{
   border-radius: 50%;
 }
 
+.artbio-heading{
+  font-family: 'Fira Sans Extra Condensed', sans-serif;
 
+}
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
@@ -204,5 +244,7 @@ a {
     display: grid;
     place-content: center;
   }
-  
+ .display-image{
+  width: fit-content;
+ }
 }

@@ -10,6 +10,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { ArrowDown, ArrowUp} from 'react-bootstrap-icons';
+import Link from "next/link"
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOXKEY;
 
@@ -284,11 +285,17 @@ const Map = () => {
     .btn-xxl {
       font-size: 1.5rem;
     }
+    
+@media only screen and (max-width: 600px) {
+    .btn-xxl {
+      font-size: 1rem;
+    }
+  
+}
     `}
 
       </style>
       <Row className="text-center" >
-        <h1>Locations</h1>
         <div className="image-box-container">
           {dataForDisplay.map((name, index) => (
             <ul key={index} onClick={() => handleSelectLocation(name)}>
@@ -299,6 +306,8 @@ const Map = () => {
           ))}
 
         </div>
+        <h1>Locations</h1>
+
         <div className="text-center" >
           <Button type="button" onClick={() => setExpanded(!expanded)} variant="flat" size="xxl" >
             {expanded ?
@@ -321,8 +330,7 @@ const Map = () => {
         </Col>
         <Col sm={4}>
           <div className="sidebar" id="side">
-            <a href={`/profiles/${artistname}`} ><h1> {artistname} </h1>
-            </a>
+          <Link  href={`/profiles/${artistname}`}> <h2 className="artlink"> {artistname} </h2></Link>
             <p> {artistheading} </p>
             <p> Location: {addressLocation} </p>
             <a >
