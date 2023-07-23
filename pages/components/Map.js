@@ -346,4 +346,8 @@ const Map = () => {
         </Col>
       </Row>
     </Container>
-  
+  )
+};
+
+
+export default Map;
