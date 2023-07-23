@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import mapboxgl from "mapbox-gl";
 import React, { useEffect, useState, useRef } from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client'
 import geoJson from "../data/locations.json"
 import otherlocations from "../data/otherlocations.json"
 import Image from "next/image";
@@ -175,7 +175,7 @@ const Map = () => {
         const feature = features[0];
         const popupNode = document.createElement("div");
 
-        ReactDOM.render(
+        createRoot(ref.current).render(
           <Popup
             image={feature?.properties?.image}
             heading={feature?.properties?.heading}
@@ -238,7 +238,7 @@ const Map = () => {
         // create popup node
         const popupNode = document.createElement("div");
 
-        ReactDOM.render(
+        createRoot(ref.current).render(
           <Popup
             image={feature?.properties?.image}
             heading={feature?.properties?.heading}
@@ -346,8 +346,4 @@ const Map = () => {
         </Col>
       </Row>
     </Container>
-  )
-};
-
-
-export default Map;
+  
