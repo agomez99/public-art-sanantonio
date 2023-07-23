@@ -5,9 +5,7 @@ import Navbar from '../components/Navbar'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
-
-
+import { motion } from "framer-motion";
 
 const Page = ({ name, avatar, image, heading, about }) => {
     console.log(name)
@@ -17,27 +15,33 @@ const Page = ({ name, avatar, image, heading, about }) => {
     return (
         <div>
             <Navbar />
-            <Container>
-                <Row>
-                    <Col md={8}>
-                        <h1 className='bio-name'>{name}</h1>
-                        <p className='bio-about'>{about}</p>
-                    </Col>
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+            >
+                <Container>
+                    <Row>
+                        <Col md={8}>
+                            <h1 className='bio-name'>{name}</h1>
+                            <p className='bio-about'>{about}</p>
+                        </Col>
 
-                    <Col sm={4}>
-                        <div className="image-box">
-                            <Image src={avatar} width={300} height={300} alt="image" className='bio-image' />
-                        </div>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <Image src={image} width={200} height={200} alt="image" className='art-image' />
-                        <p className='artbio-heading'>{heading}</p>
-                    </Col>
-                </Row>
-            </Container>
-
+                        <Col sm={4}>
+                            <div className="image-box">
+                                <Image src={avatar} width={300} height={300} alt="image" className='bio-image' />
+                            </div>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Image src={image} width={200} height={200} alt="image" className='art-image' />
+                            <p className='artbio-heading'>{heading}</p>
+                        </Col>
+                    </Row>
+                </Container>
+            </motion.div>
         </div>
     )
 }

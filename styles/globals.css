@@ -124,7 +124,8 @@ a:link { text-decoration: none; }
 .name-link{
   font-size: 1.3rem;
   text-decoration: none;
-
+  font-family: 'Fira Sans Extra Condensed', sans-serif;
+  color: #372545;
 }
 
 .popup{
@@ -145,13 +146,15 @@ a:link { text-decoration: none; }
 }
 
 .bio-name{
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   font-family: 'Fira Sans Extra Condensed', sans-serif;
+  color: #372545;
 
 }
 .bio-about{
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-family: 'Fira Sans Extra Condensed', sans-serif;
+  color: #372545;
 
 
 }

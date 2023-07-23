@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { motion } from "framer-motion";
 
 
 
@@ -12,6 +13,12 @@ export default function Artists() {
     <Container fluid>    
      <Row>
         <Col>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
           <div className="artist-image-container">
             {geoJson.features.map(({ properties: { name, avatar } }, index) => (
               <div key={index}>
@@ -22,6 +29,7 @@ export default function Artists() {
               </div>
             ))}
           </div>
+          </motion.div>
         </Col>
       </Row>
     </Container>
