@@ -1,6 +1,5 @@
 
 import React from 'react'
-import Navbar from './components/Navbar'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -12,7 +11,6 @@ import { motion } from 'framer-motion';
 
 export default function About() {
   return <>
-    <Navbar />
     <Container className={styles.main}>
       <Row>
         <Col>

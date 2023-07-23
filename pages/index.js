@@ -2,7 +2,6 @@ import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import Map from "./components/Map"
-import Navbar from './components/Navbar'
 import Image from 'next/image'
 import { motion } from "framer-motion";
 
@@ -19,7 +18,6 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
       </Head>
-      <Navbar />
       <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -27,10 +25,6 @@ export default function Home() {
             transition={{ duration: 0.5 }}
           >
       <main className={`${styles.main}`}>
-
-
-
-
         <motion.h1
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}

@@ -19,6 +19,7 @@ export default function Artists() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
           >
+         <h1 className='artist-header'>Artists Index</h1>
           <div className="artist-image-container">
             {geoJson.features.map(({ properties: { name, avatar } }, index) => (
               <div key={index}>

@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router'
 import geoJson from '../data/locations.json'
 import Image from 'next/image'
-import Navbar from '../components/Navbar'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -14,7 +13,6 @@ const Page = ({ name, avatar, image, heading, about }) => {
 
     return (
         <div>
-            <Navbar />
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
