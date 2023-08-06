@@ -330,6 +330,50 @@
             "state": "Texas",
             "about":"bio..."
           }
+          
+        },
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              -98.45182,
+              29.31852
+            ]
+          },
+          "properties": {
+            "heading":"Árbol de la Vida: Memorias y Voces de la Tierra (Tree of Life: Memories and Voices of the Land)",
+            "name":" Margarita Cabrera",
+            "avatar":"/artist/gay.jpg",
+            "address": "10040 Espada Road",
+            "image":"/images/a-rbol-de-la-vida.jpg",
+            "info": "10040 Espada Road",
+            "city": "San Antonio",
+            "postalCode": "78217",
+            "state": "Texas",
+            "about":"For this piece located near Mission San Francisco de la Espada, Margarita Cabrera collaborated with community members to create 700 clay sculptures that adorn a steel tree-like structure."
+          }
+          
+        },
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              -98.489612,
+              29.425823
+            ]
+          },
+          "properties": {
+            "heading":"And yet, we bloom",
+            "name":"Kat Cadena",
+            "avatar":"/artist/gay.jpg",
+            "address": "Corner of E. Houston and Navarro street",
+            "image":"/images/and-yet-we-bloom.jpg",
+            "info": "Corner of E. Houston and Navarro street",
+            "about":"Work by artist Kat Cadena was voted Best Mural in the Current's 2020 Best of San Antonio Issue."
+          }
+          
         }
       ]
 }

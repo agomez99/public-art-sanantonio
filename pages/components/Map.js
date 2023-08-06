@@ -11,6 +11,8 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { ArrowDown, ArrowUp} from 'react-bootstrap-icons';
 import Link from "next/link"
+import ReactDOM from "react-dom";
+import MyApp from "../_app";
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOXKEY;
 
@@ -175,7 +177,7 @@ const Map = () => {
         const feature = features[0];
         const popupNode = document.createElement("div");
 
-        createRoot(ref.current).render(
+        ReactDOM.render(
           <Popup
             image={feature?.properties?.image}
             heading={feature?.properties?.heading}
@@ -238,7 +240,8 @@ const Map = () => {
         // create popup node
         const popupNode = document.createElement("div");
 
-        createRoot(ref.current).render(
+        ReactDOM.render(
+
           <Popup
             image={feature?.properties?.image}
             heading={feature?.properties?.heading}
@@ -296,7 +299,7 @@ const Map = () => {
 
       </style>
       <Row className="text-center" >
-        <div className="image-box-container">
+        <div className="image-box-container ">
           {dataForDisplay.map((name, index) => (
             <ul key={index} onClick={() => handleSelectLocation(name)}>
             <a  href="#side">
