@@ -16,7 +16,11 @@
 }
 
 
+a.blogLink{
+  text-decoration: none;
+  color:#372545;
 
+}
 
 /* Mobile */
 @media (max-width: 700px) {

@@ -49,6 +49,8 @@ export default function About() {
                 <FaLinkedin size={30}  color="#372545" />  
                 </a>
               </p>
+              <p>Blog for more info</p>
+              <a href="https://artlocalsanantonio.wordpress.com/" className={styles.blogLink}>https://artlocalsanantonio.wordpress.com/</a>
             </div>
           </motion.div>
 
