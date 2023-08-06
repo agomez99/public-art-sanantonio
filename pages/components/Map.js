@@ -11,8 +11,6 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { ArrowDown, ArrowUp} from 'react-bootstrap-icons';
 import Link from "next/link"
-import ReactDOM from "react-dom";
-import MyApp from "../_app";
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOXKEY;
 
@@ -177,13 +175,12 @@ const Map = () => {
         const feature = features[0];
         const popupNode = document.createElement("div");
 
-        ReactDOM.render(
+        createRoot(popupNode).render(
           <Popup
             image={feature?.properties?.image}
             heading={feature?.properties?.heading}
             name={feature?.properties?.name}
           />,
-          popupNode
         );
         popUpRef.current
           .setLngLat(e.lngLat)
@@ -237,23 +234,6 @@ const Map = () => {
           coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
         }
 
-        // create popup node
-        const popupNode = document.createElement("div");
-
-        ReactDOM.render(
-
-          <Popup
-            image={feature?.properties?.image}
-            heading={feature?.properties?.heading}
-            name={feature?.properties?.name}
-          />,
-          popupNode
-        );
-
-        popUpRef.current
-          .setLngLat(e.lngLat)
-          .setDOMContent(popupNode)
-          .addTo(map);
       } else {
         map.getCanvas().style.cursor = popUpRef.current.remove();
       }
