@@ -9,7 +9,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import { ArrowDown, ArrowUp} from 'react-bootstrap-icons';
+import { ArrowDown, ArrowUp } from 'react-bootstrap-icons';
 import Link from "next/link"
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOXKEY;
@@ -193,10 +193,11 @@ const Map = () => {
       map.getCanvas().style.cursor = "pointer";
     });
 
-    map.on("mouseleave", ["points", "star"], function () {
+    //removes on ouse movement
+/*     map.on("mouseleave", ["points", "star"], function () {
       map.getCanvas().style.cursor = "";
       popUpRef.current.remove();
-    })
+    }) */
 
     map.on("click", ["points", "star"], function (e) {
       const layer = e.features[0].layer.id;
@@ -248,7 +249,7 @@ const Map = () => {
 
   return (
 
-
+    //show more button CSS
     <Container>
       <style type="text/css">
         {`
@@ -269,12 +270,12 @@ const Map = () => {
       font-size: 1.5rem;
     }
     
-@media only screen and (max-width: 600px) {
-    .btn-xxl {
-      font-size: 1rem;
+    @media only screen and (max-width: 600px) {
+        .btn-xxl {
+          font-size: 1rem;
+        }
+      
     }
-  
-}
     `}
 
       </style>
@@ -282,8 +283,8 @@ const Map = () => {
         <div className="image-box-container ">
           {dataForDisplay.map((name, index) => (
             <ul key={index} onClick={() => handleSelectLocation(name)}>
-            <a  href="#side">
-              <Image src={geoJson.features[index].properties.image} width={100} height={100} alt="location-image" className="image-list" />
+              <a href="#side">
+                <Image src={geoJson.features[index].properties.image} width={100} height={100} alt="location-image" className="image-list" />
               </a>
             </ul>
           ))}
@@ -296,13 +297,13 @@ const Map = () => {
             {expanded ?
               (
                 <>
-                  <ArrowUp /> show less 
+                  <ArrowUp /> show less
                 </>
               )
               :
               (
                 <>
-                  <ArrowDown />show more   
+                  <ArrowDown />show more
                 </>
               )
             }
@@ -313,21 +314,17 @@ const Map = () => {
         </Col>
         <Col sm={4}>
           <div className="sidebar" id="side">
-          <Link  href={`/profiles/${artistname}`}> <h2 className="artlink"> {artistname} </h2></Link>
+            <Link href={`/profiles/${artistname}`}> <h2 className="artlink"> {artistname} </h2></Link>
             <p> {artistheading} </p>
             <p> Location: {addressLocation} </p>
             <a >
-              <img src={artistImage} className="display-image" alt="featured-image" width={400} height={400} />
+              <img src={artistImage} className="display-image" alt="featured-image" />
             </a>
           </div>
 
         </Col>
       </Row>
-      <Row>
-        <Col>
 
-        </Col>
-      </Row>
     </Container>
   )
 };
