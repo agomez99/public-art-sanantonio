@@ -5,7 +5,7 @@ export default function Document() {
     <Html lang="en">
       <Head >
       <link
-          href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css"
+          href="https://api.mapbox.com/mapbox-gl-js/v3.0.0-beta.1/mapbox-gl.css"
           rel="stylesheet"
         />
         <link rel="icon" href="./alamo.png" />
