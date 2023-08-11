@@ -25,7 +25,7 @@ export default function Home() {
             Public Art San Antonio
           </motion.h1>
           <div className='image-container'>
-            <Image src="/images/Banner.png" alt="banner" className="banner" width={700} height={200} />
+            <Image src="/images/Banner.png" alt="banner" className="banner" width={400} height={400} />
           </div>
           <div className="map-container">
             <Map />

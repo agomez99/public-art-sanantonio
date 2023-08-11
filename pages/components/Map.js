@@ -328,7 +328,9 @@ const Map = () => {
 
         </Col>
       </Row>
-
+          <footer>
+            
+          </footer>
     </Container>
   )
 };

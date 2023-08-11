@@ -43,10 +43,8 @@ a {
 }
 
   .banner {
-    object-fit: contain;
-    width: 100% !important;
-    position: relative !important;
-    height:100px;
+    height:100%;
+    width:auto;
   }
   .banner-txt{
     font-family: 'Fira Sans Extra Condensed', sans-serif;
@@ -115,7 +113,7 @@ a:link { text-decoration: none; }
   padding:5%;
 }
 .display-image{
-  border-radius: 5%;
+  border-radius: 2%;
   height:300px;
   width: 350px;
 }
@@ -170,6 +168,21 @@ a:link { text-decoration: none; }
   font-family: 'Fira Sans Extra Condensed', sans-serif;
 
 }
+
+
+
+footer {
+  position: fixed;
+  background-color: #372545;
+  color: white;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 8px;
+  text-align: center;
+  font-family: 'Fira Sans Extra Condensed', sans-serif;
+
+}
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
@@ -180,7 +193,9 @@ a:link { text-decoration: none; }
   .image-container {
     width: 90%;
   }
-
+.banner{
+   width:100%
+}
   .image{
     width:100px;
     height:100px;
