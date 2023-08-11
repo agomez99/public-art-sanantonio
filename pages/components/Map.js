@@ -86,14 +86,14 @@ const Map = () => {
 
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
-      //style: "mapbox://styles/mapbox/navigation-night-v1",
+      style: "mapbox://styles/mapbox/navigation-night-v1",
       center: [lng, lat],
       zoom: zoom,
     });
 
-    map.on('style.load', () => {
-      map.setConfigProperty('basemap', 'lightPreset', 'dusk');
-  });
+  //   map.on('style.load', () => {
+  //     map.setConfigProperty('basemap', 'lightPreset', 'dusk');
+  // });
 
     map.on("load", function () {
       // Add an image to use as a custom marker
@@ -110,6 +110,7 @@ const Map = () => {
             data: {
               type: "FeatureCollection",
               features: geoJson.features,
+
             },
           });
           // Add a symbol layer
@@ -121,8 +122,8 @@ const Map = () => {
             layout: {
               "icon-image": "custom-marker",
               // get the title name from the source's "title" property
-              //"text-field": ["get", "title"],
-              //"text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+              "text-field": ["get", "title"],
+              "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
               "text-offset": [0, 1.25],
               "text-anchor": "top",
             },
@@ -155,8 +156,8 @@ const Map = () => {
             layout: {
               "icon-image": "local-marker",
               // get the title name from the source's "title" property
-              //"text-field": ["get", "title"],
-             // "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+              "text-field": ["get", "title"],
+             "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
               "text-offset": [0, 1.25],
               "text-anchor": "top",
             },
