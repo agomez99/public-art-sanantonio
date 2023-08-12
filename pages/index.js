@@ -3,7 +3,7 @@ import styles from '@/styles/Home.module.css'
 import Map from "./components/Map"
 import Image from 'next/image'
 import { motion } from "framer-motion";
-
+import Head from 'next/head';
 
 const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
@@ -15,6 +15,7 @@ export default function Home() {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.5 }}
       >
+      
         <main className={`${styles.main}`}>
           <motion.h1
             initial={{ opacity: 0, y: -50 }}
@@ -25,7 +26,7 @@ export default function Home() {
             Public Art San Antonio
           </motion.h1>
           <div className='image-container'>
-            <Image src="/images/Banner.png" alt="banner" className="banner" width={400} height={400} />
+            <Image src="/images/Banner.png" alt="banner" className="banner" width={400} height={400} priority />
           </div>
           <div className="map-container">
             <Map />

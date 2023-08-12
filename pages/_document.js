@@ -11,6 +11,7 @@ export default function Document() {
         />
         <link rel="icon" href="./alamo.png" />
         <meta charset="utf-8" />
+        <title>Public Art San Antonio</title>
       </Head>
       <Nav />
       <body>

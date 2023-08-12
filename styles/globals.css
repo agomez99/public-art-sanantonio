@@ -138,14 +138,22 @@ a:link { text-decoration: none; }
 
 
 .mapboxgl-popup-close-button{
-  font-size: 3rem;
+  font-size: 2rem;
+  color:#372545;
+}
+.mapboxgl-popup-close-button:hover{
+  font-size: 2rem;
   color:red;
 }
 .loc-artist{
   text-align: center;
+  font-family: 'Fira Sans Extra Condensed', sans-serif;
+
 }
 .loc-heading{
   text-align: center;
+  font-family: 'Fira Sans Extra Condensed', sans-serif;
+
 }
 
 .bio-name{
@@ -186,6 +194,12 @@ footer {
   font-family: 'Fira Sans Extra Condensed', sans-serif;
 
 }
+
+
+
+
+
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
