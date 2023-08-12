@@ -35,6 +35,11 @@ const Map = () => {
   const [lat] = useState(29.426359577566828);
   const [zoom, setZoom] = useState(12);
 
+  const [artistheading, setHeading] = useState("")
+  const [artistname, setName] = useState([geoJson.features[0].properties.name])
+  const [artistImage, setImage] = useState([geoJson.features[0].properties.image])
+  const [addressLocation, setAddressLocation] = useState([geoJson.features[0].properties.address])
+
   const [artistData, setArtistData] = useState({
     heading: geoJson.features[0].properties.heading,
     name: geoJson.features[0].properties.name,
@@ -46,7 +51,7 @@ const Map = () => {
   const dataForDisplay = expanded ? geoJson.features : geoJson.features.slice(0, 9)
 
   const [selectedLocation, setSelectedLocation] = useState({
-    name: "",
+    name: artistname,
     latitude: lat,
     longitude: lng,
   });
@@ -58,25 +63,40 @@ const Map = () => {
     setZoom(15);
     setArtistData({ heading, name, image, address });
 
+    if (map.current) {
+      map.current.flyTo({
+        center: coordinates,
+        lat: coordinates[1],
+        lng: coordinates[0],
+        zoom: 15,
+        essential: true,
+      });
+
+      const popupNode = document.createElement("div");
+
+      createRoot(popupNode).render(
+        <Popup image={image} heading={heading} name={name} />,
+      );
+
+      popUpRef.current
+        .setLngLat(coordinates)
+        .setDOMContent(popupNode)
+        .addTo(map.current);
+    }
     setSelectedLocation({
-      name,
+      name: name,
       latitude: coordinates[1],
       longitude: coordinates[0],
       heading,
       image,
-      address,
+      address: address,
       description,
     });
-    console.log(selectedLocation)
+  }
 
-      if (map.current) {
-        map.current.flyTo({
-          center: selectedLocation,
-          zoom: 10,
-        });
-      }
-    }
-
+  console.log(artistData)
+  const handleFlyToLocation = (coordinates, heading, name, image) => {
+  };
   // Initialize map when component mounts
   useEffect(() => {
 
@@ -87,13 +107,13 @@ const Map = () => {
       zoom: zoom,
     });
 
-  //   map.on('style.load', () => {
-  //     map.setConfigProperty('basemap', 'lightPreset', 'dusk');
-  // });
+    //   map.on('style.load', () => {
+    //     map.setConfigProperty('basemap', 'lightPreset', 'dusk');
+    // });
 
     map.on("load", function () {
       // Add an image to use as a custom marker
-      
+
       map.loadImage(
         "https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png",
         function (error, image) {
@@ -153,7 +173,7 @@ const Map = () => {
               "icon-image": "local-marker",
               // get the title name from the source's "title" property
               "text-field": ["get", "title"],
-             "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+              "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
               "text-offset": [0, 1.25],
               "text-anchor": "top",
             },
@@ -161,8 +181,6 @@ const Map = () => {
         }
       );
     });
-
-
 
     // Add navigation control (the +/- zoom buttons)
     map.addControl(new mapboxgl.NavigationControl(), "top-right");
@@ -194,23 +212,26 @@ const Map = () => {
       map.getCanvas().style.cursor = "pointer";
     });
 
-    //removes on ouse movement
-/*     map.on("mouseleave", ["points", "star"], function () {
-      map.getCanvas().style.cursor = "";
-      popUpRef.current.remove();
-    }) */
-
     map.on("click", ["points", "star"], function (e) {
       const layer = e.features[0].layer.id;
-      handlePopup(e, [layer]);
-      map.flyTo({
 
+      handlePopup(e, [layer]);
+
+      map.flyTo({
         center: e.lngLat,
         zoom: 15,
         essential: true
       });
 
+      setArtistData({
+        name: e.features[0].properties.name,
+        heading: e.features[0].properties.heading,
+        address: e.features[0].properties.address,
+        image: e.features[0].properties.image,
+
+      });
     });
+
 
 
     map.on("click", ["points", "star"], function (e) {
@@ -218,8 +239,6 @@ const Map = () => {
       setImage(e.features[0].properties.image);
       setHeading(e.features[0].properties.heading);
       setAddressLocation(e.features[0].properties.address);
-
-
     })
     map.on("mousemove", ["points", "star"], function (e) {
       const layer = e.features[0].layer.id;
@@ -240,12 +259,7 @@ const Map = () => {
         map.getCanvas().style.cursor = popUpRef.current.remove();
       }
     });
-
-
-  },
-
-
-    []);
+  },[]);
 
   return (
 
@@ -281,10 +295,10 @@ const Map = () => {
       </style>
       <Row className="text-center" >
         <div className="image-box-container ">
-          {dataForDisplay.map((name, index) => (
-            <ul key={index} onClick={() => handleSelectLocation(name)}>
+          {dataForDisplay.map((location, index) => (
+            <ul key={index} >
               <a href="#side">
-                <Image src={geoJson.features[index].properties.image} width={100} height={100} alt="location-image" className="image-list" />
+                <Image onClick={() => handleSelectLocation(location)} src={geoJson.features[index].properties.image} width={100} height={100} alt="location-image" className="image-list" />
               </a>
             </ul>
           ))}
@@ -313,20 +327,17 @@ const Map = () => {
           <div className="map-container" ref={mapContainerRef} />
         </Col>
         <Col sm={4}>
-          <div className="sidebar" id="side">
+          <div className="sidebar">
             <Link href={`/profiles/${artistData.name}`}> <h2 className="artlink"> {artistData.name} </h2></Link>
             <p> {artistData.heading} </p>
-            <p> Location: {artistData.location} </p>
-            <a >
+            <p> Location: {artistData.address} </p>
+            <a href="#side">
               <img src={artistData.image} className="display-image" alt="featured-image" />
             </a>
           </div>
 
         </Col>
       </Row>
-          <footer>
-            
-          </footer>
     </Container>
   )
 };
