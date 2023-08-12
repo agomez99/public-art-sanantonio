@@ -57,44 +57,56 @@ const Map = () => {
   });
 
   const handleSelectLocation = (geoJson) => {
+
+
+
     const { coordinates } = geoJson.geometry;
     const { heading, name, image, address, description } = geoJson.properties;
-
-    setZoom(15);
-    setArtistData({ heading, name, image, address });
-
+  
+    const newZoom = 15;
+    
     if (map.current) {
-      map.current.flyTo({
+      const { flyTo, Popup } = map.current;
+      
+      flyTo({
         center: coordinates,
-        lat: coordinates[1],
-        lng: coordinates[0],
-        zoom: 15,
+        zoom: newZoom,
         essential: true,
       });
-
-      const popupNode = document.createElement("div");
-
-      createRoot(popupNode).render(
-        <Popup image={image} heading={heading} name={name} />,
+  
+      const popupContent = (
+        <Popup
+          heading={heading}
+          name={name}
+          image={image}
+          address={address}
+          description={description}
+        />
       );
-
-      popUpRef.current
+  
+      const popupRef = popUpRef.current;
+      popupRef
         .setLngLat(coordinates)
-        .setDOMContent(popupNode)
+        .setHTML(popupContent)
         .addTo(map.current);
     }
-    setSelectedLocation({
-      name: name,
+  
+    const artistData = { heading, name, image, address };
+    setArtistData(artistData);
+  
+    const selectedLocation = {
+      name,
       latitude: coordinates[1],
       longitude: coordinates[0],
       heading,
       image,
-      address: address,
+      address,
       description,
-    });
+    };
+    setSelectedLocation(selectedLocation);
   }
+  
 
-  console.log(artistData)
   const handleFlyToLocation = (coordinates, heading, name, image) => {
   };
   // Initialize map when component mounts
