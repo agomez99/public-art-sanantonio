@@ -1,8 +1,7 @@
 import mapboxgl from "mapbox-gl";
 import React, { useEffect, useState, useRef } from "react";
 import { createRoot } from 'react-dom/client'
-import geoJson from "../data/locations.json"
-import otherlocations from "../data/otherlocations.json"
+
 import Image from "next/image";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -11,6 +10,8 @@ import Button from 'react-bootstrap/Button';
 import { ArrowDown, ArrowUp } from 'react-bootstrap-icons';
 import Link from "next/link"
 
+import geoJson from "../data/locations.json"
+import otherlocations from "../data/otherlocations.json"
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOXKEY;
 
 
@@ -34,10 +35,12 @@ const Map = () => {
   const [lat] = useState(29.426359577566828);
   const [zoom, setZoom] = useState(12);
 
-  const [artistheading, setHeading] = useState([geoJson.features[0].properties.heading])
-  const [artistname, setName] = useState([geoJson.features[0].properties.name])
-  const [artistImage, setImage] = useState([geoJson.features[0].properties.image])
-  const [addressLocation, setAddressLocation] = useState([geoJson.features[0].properties.address])
+  const [artistData, setArtistData] = useState({
+    heading: geoJson.features[0].properties.heading,
+    name: geoJson.features[0].properties.name,
+    image: geoJson.features[0].properties.image,
+    address: geoJson.features[0].properties.address,
+  });
 
   const [expanded, setExpanded] = useState(false)
   const dataForDisplay = expanded ? geoJson.features : geoJson.features.slice(0, 9)
@@ -48,25 +51,12 @@ const Map = () => {
     longitude: lng,
   });
 
-  /*   useEffect(() => {
-      if (map.current) {
-        map.current.flyTo({
-          center: selectedLocation,
-          zoom: 10,
-        });
-      }
-    }, [selectedLocation]);
-   */
-
   const handleSelectLocation = (geoJson) => {
     const { coordinates } = geoJson.geometry;
     const { heading, name, image, address, description } = geoJson.properties;
 
     setZoom(15);
-    setHeading([heading])
-    setName([name])
-    setImage([image])
-    setAddressLocation([address])
+    setArtistData({ heading, name, image, address });
 
     setSelectedLocation({
       name,
@@ -77,9 +67,15 @@ const Map = () => {
       address,
       description,
     });
+    console.log(selectedLocation)
 
-  };
-
+      if (map.current) {
+        map.current.flyTo({
+          center: selectedLocation,
+          zoom: 10,
+        });
+      }
+    }
 
   // Initialize map when component mounts
   useEffect(() => {
@@ -318,11 +314,11 @@ const Map = () => {
         </Col>
         <Col sm={4}>
           <div className="sidebar" id="side">
-            <Link href={`/profiles/${artistname}`}> <h2 className="artlink"> {artistname} </h2></Link>
-            <p> {artistheading} </p>
-            <p> Location: {addressLocation} </p>
+            <Link href={`/profiles/${artistData.name}`}> <h2 className="artlink"> {artistData.name} </h2></Link>
+            <p> {artistData.heading} </p>
+            <p> Location: {artistData.location} </p>
             <a >
-              <img src={artistImage} className="display-image" alt="featured-image" />
+              <img src={artistData.image} className="display-image" alt="featured-image" />
             </a>
           </div>
 

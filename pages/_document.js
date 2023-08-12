@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from 'next/document'
+import Nav from './components/Navbar'
 
 export default function Document() {
   return (
@@ -11,6 +12,7 @@ export default function Document() {
         <link rel="icon" href="./alamo.png" />
         <meta charset="utf-8" />
       </Head>
+      <Nav />
       <body>
         <Main />
         <NextScript />
