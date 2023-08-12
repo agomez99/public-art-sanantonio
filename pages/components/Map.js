@@ -259,7 +259,7 @@ const Map = () => {
         map.getCanvas().style.cursor = popUpRef.current.remove();
       }
     });
-  },[]);
+  }, []);
 
   return (
 
@@ -288,6 +288,14 @@ const Map = () => {
         .btn-xxl {
           font-size: 1rem;
         }
+        .btn-flat {
+
+      width:100%;
+    }
+     .btn-flat:after  {
+      background-color:white;
+      width:100%;
+    }
       
     }
     `}
