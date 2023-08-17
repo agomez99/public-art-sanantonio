@@ -57,9 +57,6 @@ const Map = () => {
   });
 
   const handleSelectLocation = (geoJson) => {
-
-
-
     const { coordinates } = geoJson.geometry;
     const { heading, name, image, address, description } = geoJson.properties;
   
