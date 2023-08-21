@@ -58,7 +58,6 @@ a {
 .map-container{
   height: 500px;
   width:100%;
-  margin-bottom: 200px;
 
 }
 
@@ -117,6 +116,15 @@ a:link { text-decoration: none; }
   border-radius: 2%;
   height:300px;
   width: 350px;
+}
+
+.nearby-list{
+  list-style: none;
+  display: inline-flex;
+  margin-bottom: 300px;
+}
+.nearby-image{
+  height:60px;
 }
 .name-text{
   text-align: center;

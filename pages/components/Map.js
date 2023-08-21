@@ -28,6 +28,11 @@ const Popup = ({ heading, name, image }) => (
 )
 
 const Map = () => {
+
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
+  const [nearbyLocations, setNearbyLocations] = useState([]);
+
   const mapContainerRef = useRef(null);
   const popUpRef = useRef(new mapboxgl.Popup({ offset: 15 }))
   const map = useRef(null);
@@ -55,22 +60,34 @@ const Map = () => {
     latitude: lat,
     longitude: lng,
   });
+  const handleLocationSelection = (coordinates) => {
+    setLatitude(coordinates[1]);
+    setLongitude(coordinates[0]);
+  };
+  const handleNearbyLocationClick = (location) => {
+    handleSelectLocation(location);
+    setExpanded(false);
+    setZoom(15);
 
+  }
+
+  
+  
   const handleSelectLocation = (geoJson) => {
     const { coordinates } = geoJson.geometry;
     const { heading, name, image, address, description } = geoJson.properties;
-  
+
     const newZoom = 15;
-    
+
     if (map.current) {
       const { flyTo, Popup } = map.current;
-      
+
       flyTo({
         center: coordinates,
         zoom: newZoom,
         essential: true,
       });
-  
+
       const popupContent = (
         <Popup
           heading={heading}
@@ -80,17 +97,18 @@ const Map = () => {
           description={description}
         />
       );
-  
+
       const popupRef = popUpRef.current;
       popupRef
         .setLngLat(coordinates)
         .setHTML(popupContent)
         .addTo(map.current);
     }
-  
+
     const artistData = { heading, name, image, address };
+    
     setArtistData(artistData);
-  
+
     const selectedLocation = {
       name,
       latitude: coordinates[1],
@@ -102,18 +120,33 @@ const Map = () => {
     };
     setSelectedLocation(selectedLocation);
   }
-  
 
-  const handleFlyToLocation = (coordinates, heading, name, image) => {
-  };
+
+
   // Initialize map when component mounts
   useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          setLatitude(position.coords.latitude);
+          setLongitude(position.coords.longitude);
+        },
+        error => {
+          console.error(error);
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+    }
 
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
       style: "mapbox://styles/mapbox/navigation-night-v1",
       center: [lng, lat],
       zoom: zoom,
+      pitch: 45,
+      bearing: -17.6,
+      antialias: true
     });
 
     //   map.on('style.load', () => {
@@ -228,7 +261,7 @@ const Map = () => {
 
       map.flyTo({
         center: e.lngLat,
-        zoom: 15,
+        zoom: 16,
         essential: true
       });
 
@@ -239,6 +272,9 @@ const Map = () => {
         image: e.features[0].properties.image,
 
       });
+
+      handleLocationSelection(e.features[0].geometry.coordinates);
+
     });
 
 
@@ -268,8 +304,94 @@ const Map = () => {
         map.getCanvas().style.cursor = popUpRef.current.remove();
       }
     });
+
+
+    map.on('style.load', () => {
+      // Insert the layer beneath any symbol layer.
+      const layers = map.getStyle().layers;
+      const labelLayerId = layers.find(
+        (layer) => layer.type === 'symbol' && layer.layout['text-field']
+      ).id;
+
+      // The 'building' layer in the Mapbox Streets
+      // vector tileset contains building height data
+      // from OpenStreetMap.
+      map.addLayer(
+        {
+          'id': 'add-3d-buildings',
+          'source': 'composite',
+          'source-layer': 'building',
+          'filter': ['==', 'extrude', 'true'],
+          'type': 'fill-extrusion',
+          'minzoom': 15,
+          'paint': {
+            'fill-extrusion-color': '#aaa',
+
+            // Use an 'interpolate' expression to
+            // add a smooth transition effect to
+            // the buildings as the user zooms in.
+            'fill-extrusion-height': [
+              'interpolate',
+              ['linear'],
+              ['zoom'],
+              15,
+              0,
+              15.05,
+              ['get', 'height']
+            ],
+            'fill-extrusion-base': [
+              'interpolate',
+              ['linear'],
+              ['zoom'],
+              15,
+              0,
+              15.05,
+              ['get', 'min_height']
+            ],
+            'fill-extrusion-opacity': 0.6
+          }
+        },
+        labelLayerId
+      );
+    });
+    
   }, []);
 
+
+  useEffect(() => {
+    if (latitude && longitude) {
+      const nearby = geoJson.features.filter(location => {
+        const distance = calculateDistance(
+          latitude,
+          longitude,
+          location.geometry.coordinates[1], // Latitude
+          location.geometry.coordinates[0]  // Longitude
+        );
+        return distance <= 8; // Change this threshold distance as needed kilometers
+      });
+      setNearbyLocations(nearby);
+
+    }
+  }, [latitude, longitude]);
+
+
+
+  const calculateDistance = (lat1, lon1, lat2, lon2) => {
+    const R = 6371; // Earth's radius in km
+    const dLat = degToRad(lat2 - lat1);
+    const dLon = degToRad(lon2 - lon1);
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(degToRad(lat1)) * Math.cos(degToRad(lat2)) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c;
+    return distance;
+  };
+
+  const degToRad = (deg) => {
+    return deg * (Math.PI / 180);
+  };
   return (
 
     //show more button CSS
@@ -342,6 +464,30 @@ const Map = () => {
         </div>
         <Col md={8}>
           <div className="map-container" ref={mapContainerRef} />
+{/*           
+          {latitude && longitude ? (
+        <div>
+          Latitude: {latitude}<br />
+          Longitude: {longitude}
+        </div>
+      ) : (
+        <p>Loading...</p>
+      )} */}
+
+      <h2>Nearby Locations</h2>
+      <ul>
+        {nearbyLocations.map((location, index) => (
+          
+          <li key={index} className="nearby-list"> 
+          <button
+          onClick={() => handleNearbyLocationClick(location)}
+        >
+          <img src={location.properties.image} className="nearby-image" alt="featured-image" />
+          </button>
+
+          </li>
+        ))}
+      </ul>
         </Col>
         <Col sm={4}>
           <div className="sidebar">
@@ -351,6 +497,7 @@ const Map = () => {
             <a href="#side">
               <img src={artistData.image} className="display-image" alt="featured-image" />
             </a>
+
           </div>
 
         </Col>
