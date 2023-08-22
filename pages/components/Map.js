@@ -71,8 +71,8 @@ const Map = () => {
 
   }
 
-  
-  
+
+
   const handleSelectLocation = (geoJson) => {
     const { coordinates } = geoJson.geometry;
     const { heading, name, image, address, description } = geoJson.properties;
@@ -106,7 +106,7 @@ const Map = () => {
     }
 
     const artistData = { heading, name, image, address };
-    
+
     setArtistData(artistData);
 
     const selectedLocation = {
@@ -354,7 +354,7 @@ const Map = () => {
         labelLayerId
       );
     });
-    
+
   }, []);
 
 
@@ -367,7 +367,9 @@ const Map = () => {
           location.geometry.coordinates[1], // Latitude
           location.geometry.coordinates[0]  // Longitude
         );
-        return distance <= 8; // Change this threshold distance as needed kilometers
+        return distance <= 3 && !isApproximatelyEqual(
+          location.geometry.coordinates[1], latitude) &&
+          !isApproximatelyEqual(location.geometry.coordinates[0], longitude);
       });
       setNearbyLocations(nearby);
 
@@ -386,8 +388,15 @@ const Map = () => {
       Math.sin(dLon / 2) * Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     const distance = R * c;
-    return distance;
+
+    // Convert distance from kilometers to miles
+    const milesPerKilometer = 0.621371;
+    return distance * milesPerKilometer;
   };
+  const isApproximatelyEqual = (value1, value2, tolerance = 0.00001) => {
+    return Math.abs(value1 - value2) < tolerance;
+  };
+
 
   const degToRad = (deg) => {
     return deg * (Math.PI / 180);
@@ -462,9 +471,12 @@ const Map = () => {
             }
           </Button>
         </div>
+        </Row>
+        <Row className="text-center mapfeature-container" >
+
         <Col md={8}>
           <div className="map-container" ref={mapContainerRef} />
-{/*           
+          {/*           
           {latitude && longitude ? (
         <div>
           Latitude: {latitude}<br />
@@ -474,22 +486,30 @@ const Map = () => {
         <p>Loading...</p>
       )} */}
 
-      <h2>Nearby Locations</h2>
-      <ul>
-        {nearbyLocations.map((location, index) => (
-          
-          <li key={index} className="nearby-list"> 
-          <button
-          onClick={() => handleNearbyLocationClick(location)}
-        >
-          <img src={location.properties.image} className="nearby-image" alt="featured-image" />
-          </button>
+          <h2>Nearby Locations</h2>
+          <div class="nearby-container">
+            <ul>
+              {nearbyLocations.map((location, index) => (
 
-          </li>
-        ))}
-      </ul>
+                <li key={index} className="nearby-list">
+                  <button
+                    onClick={() => handleNearbyLocationClick(location)}
+                  >
+                    <img src={location.properties.image} className="nearby-image" alt="featured-image" />
+                  </button>
+                  <p> {calculateDistance(
+                    latitude,
+                    longitude,
+                    location.geometry.coordinates[1], // Latitude
+                    location.geometry.coordinates[0]  // Longitude
+                  ).toFixed(2)}mi</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+
         </Col>
-        <Col sm={4}>
+        <Col md={4}>
           <div className="sidebar">
             <Link href={`/profiles/${artistData.name}`}> <h2 className="artlink"> {artistData.name} </h2></Link>
             <p> {artistData.heading} </p>
@@ -501,7 +521,7 @@ const Map = () => {
           </div>
 
         </Col>
-      </Row>
+        </Row>
     </Container>
   )
 };

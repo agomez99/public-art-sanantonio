@@ -117,11 +117,13 @@ a:link { text-decoration: none; }
   height:300px;
   width: 350px;
 }
-
+.nearby-container{
+  margin-bottom: 100px;
+  justify-content: space-between;
+}
 .nearby-list{
   list-style: none;
-  display: inline-flex;
-  margin-bottom: 300px;
+  display: inline-block;
 }
 .nearby-image{
   height:60px;
@@ -205,15 +207,6 @@ footer {
 
 
 
-
-
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-}
-
 @media only screen and (max-width: 600px) {
   .image-container {
     width: 90%;
@@ -233,14 +226,22 @@ footer {
  .display-image{
   width: 100%;
   height:100%;
-  margin-bottom: 50px;
+  margin-bottom:20px;
 
+ }
+ .mapfeature-container{
+  display: flex;
+  flex-direction: column-reverse;
+ }
+ .nearby-container{
+  margin-bottom:30%;
  }
  
 .map-container{
   height: 500px;
   width:100%;
   margin-bottom: 10px;
+
 
 }
 }
