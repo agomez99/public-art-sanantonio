@@ -236,6 +236,7 @@ const Map = () => {
         const feature = features[0];
         const popupNode = document.createElement("div");
 
+
         createRoot(popupNode).render(
           <Popup
             image={feature?.properties?.image}
