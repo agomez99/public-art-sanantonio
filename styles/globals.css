@@ -8,9 +8,6 @@
 
 }
 
-
-
-
 * {
   box-sizing: border-box;
   padding: 0;
@@ -36,23 +33,6 @@ a {
 }
 
 
-.image-container {
-  width: 50%;
-  position: relative;
-  text-align: center;
-
-}
-
-  .banner {
-    height:100%;
-    width:auto;
-  }
-  .banner-txt{
-    font-family: 'Fira Sans Extra Condensed', sans-serif;
-    font-size: 5rem;
-    color: #372545;
-
-  }
 
 
 .map-container{
@@ -215,12 +195,8 @@ footer {
 
 
 @media only screen and (max-width: 600px) {
-  .image-container {
-    width: 90%;
-  }
-.banner{
-   width:100%
-}
+
+
   .image{
     width:100px;
     height:100px;

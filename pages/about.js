@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import styles from '@/styles/About.module.css'
 import { motion } from 'framer-motion';
-import {FaGithub, FaLinkedin} from 'react-icons/fa';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import Head from 'next/head'
 
 
@@ -20,9 +20,9 @@ export default function About() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
           >
-                <Head>
-      <title>Public Art San Antonio | About Me</title>
-      </Head>
+            <Head>
+              <title>Public Art San Antonio | About Me</title>
+            </Head>
             <div>
               <p>
                 Greetings, my name is Austine. I possess a strong passion for both web development and the arts.
@@ -43,9 +43,9 @@ export default function About() {
               </p>
               <p>
                 <a href="https://github.com/agomez99">
-                <FaGithub size={30}  color="#372545"/>                </a>
+                  <FaGithub size={30} color="#372545" />                </a>
                 <a href="https://www.linkedin.com/in/austine-gomez/">
-                <FaLinkedin size={30}  color="#372545" />  
+                  <FaLinkedin size={30} color="#372545" />
                 </a>
               </p>
               <p>Blog for more info</p>

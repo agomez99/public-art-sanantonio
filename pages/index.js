@@ -23,14 +23,14 @@ export default function Home() {
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
-            className='banner-txt'
+            className={styles.bannertxt}
           >
             Public Art San Antonio
           </motion.h1>
-          <div className='image-container'>
-            <Image src="/images/Banner.png" alt="banner" className="banner" width={400} height={400} priority />
+          <div className={styles.imageContainer}>
+            <Image src="/images/Banner.png" alt="banner" className={styles.banner} width={400} height={400} priority />
           </div>
-          <div className="map-container">
+          <div>
             <Map />
           </div>
         </main>
