@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { motion } from "framer-motion";
 
-const Page = ({ name, avatar, image, heading, about }) => {
+const Page = ({ name, avatar,imagesAndHeadings , about }) => {
     console.log(name)
     const router = useRouter()
     const { id } = router.query
@@ -19,7 +19,7 @@ const Page = ({ name, avatar, image, heading, about }) => {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}
             >
-                <Container>
+                <Container className='bio-container'>
                     <Row>
                         <Col md={8}>
                             <h1 className='bio-name'>{name}</h1>
@@ -32,11 +32,15 @@ const Page = ({ name, avatar, image, heading, about }) => {
                             </div>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col>
-                            <Image src={image} width={200} height={200} alt="image" className='art-image' />
-                            <p className='artbio-heading'>{heading}</p>
-                        </Col>
+                    <Row>     
+                    <div className='works'>                     
+                    {imagesAndHeadings.map(({ image, heading }, index) => (
+                                <div key={index} >
+                                    <Image src={image} width={200} height={200} alt="image" className='art-image' />
+                                    <p className='artbio-heading'>{heading}</p>
+                                </div>
+                            ))}
+                            </div>
                     </Row>
                 </Container>
             </motion.div>
@@ -58,17 +62,22 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
     const categories = geoJson.features;
-    const category = categories.find(
+    const propertiesWithSameName = categories.filter(
         ({ properties: { name } }) => name === params.slug
     );
+    const imagesAndHeadings = propertiesWithSameName.map(property => ({
+        image: property.properties.image,
+        heading: property.properties.heading
+    }));
 
     return {
         props: {
-            name: category.properties.name,
-            avatar: category.properties.avatar,
-            image: category.properties.image,
-            heading: category.properties.heading,
-            about: category.properties.about
+            imagesAndHeadings,
+
+            name: propertiesWithSameName[0].properties.name,
+            avatar: propertiesWithSameName[0].properties.avatar,
+            about: propertiesWithSameName[0].properties.about
+
         }
     };
 }

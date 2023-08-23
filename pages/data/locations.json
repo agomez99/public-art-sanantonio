@@ -202,6 +202,29 @@
           "geometry": {
             "type": "Point",
             "coordinates": [
+              -98.492369,
+              29.425133
+            ]
+          },
+          "properties": {
+           "heading":"Mexican Sniper Legend Mural",
+           "name":"Ethel Wilson Harris",
+           "avatar":"/artist/Ethel.jpg",
+           "image":"/images/ehtel2tile.jpg",
+           "info": "https://www.getcreativesanantonio.com/Public-Art/Public-Artworks-Map/Public-Artworks-List/Public-Artwork/Article/160/Maverick-Tile-Mural",
+            "address": "Riverwalk- Next to the West Market Street crossing.",
+            "city": "San Antonio",
+            "country": "United States",
+            "postalCode": "78201",
+            "state": "TX",
+            "about":"Ethel Wilson Harris, a noted artisan of San Antonio and champion conservationist, was born in Sabinal, Texas in 1893. Harris became one of San Antonio’s most influential women in the realm of arts, culture and preservation.As an entrepreneur she founded what would collectively be known as the San Jose Tile Workshops, which included Mexican Arts and Crafts (1931-1941), San Jose Potteries (1934-1945) and Mission Crafts(1941-1977)."
+          }
+        },
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
               -98.483700333999,
               29.419425
             ]
@@ -344,7 +367,7 @@
           "properties": {
             "heading":"Árbol de la Vida: Memorias y Voces de la Tierra (Tree of Life: Memories and Voices of the Land)",
             "name":" Margarita Cabrera",
-            "avatar":"/artist/gay.jpg",
+            "avatar":"/artist/mcabrera.jpg",
             "address": "10040 Espada Road",
             "image":"/images/a-rbol-de-la-vida.jpg",
             "info": "10040 Espada Road",
@@ -367,7 +390,7 @@
           "properties": {
             "heading":"And yet, we bloom",
             "name":"Kat Cadena",
-            "avatar":"/artist/gay.jpg",
+            "avatar":"/artist/kat.jpg",
             "address": "Corner of E. Houston and Navarro street",
             "image":"/images/and-yet-we-bloom.jpg",
             "info": "Corner of E. Houston and Navarro street",

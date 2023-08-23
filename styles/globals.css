@@ -155,40 +155,47 @@ a:link { text-decoration: none; }
   font-size: 2rem;
   color:red;
 }
+
+.bio-container{
+  font-family: 'Fira Sans Extra Condensed', sans-serif;
+  color: #372545;
+
+}
 .loc-artist{
   text-align: center;
-  font-family: 'Fira Sans Extra Condensed', sans-serif;
 
 }
 .loc-heading{
   text-align: center;
-  font-family: 'Fira Sans Extra Condensed', sans-serif;
 
 }
 
 .bio-name{
   font-size: 2.5rem;
-  font-family: 'Fira Sans Extra Condensed', sans-serif;
-  color: #372545;
+  text-align: center;
 
 }
 .bio-about{
   font-size: 1.6rem;
-  font-family: 'Fira Sans Extra Condensed', sans-serif;
-  color: #372545;
 
 
 }
 .bio-image{
   border-radius: 50%;
 }
-
+.works{
+  display: flex;
+ justify-content: center;
+}
 .artbio-heading{
-  font-family: 'Fira Sans Extra Condensed', sans-serif;
-
+  margin-bottom: 20px;
+  text-align: center;
 }
 
-
+.art-image{
+  height:150px;
+  margin: 10px;
+}
 
 footer {
   position: fixed;
