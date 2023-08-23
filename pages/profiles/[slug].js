@@ -6,8 +6,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { motion } from "framer-motion";
 
+import Head from 'next/head'
+
 const Page = ({ name, avatar,imagesAndHeadings , about }) => {
-    console.log(name)
     const router = useRouter()
     const { id } = router.query
 
@@ -19,6 +20,9 @@ const Page = ({ name, avatar,imagesAndHeadings , about }) => {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}
             >
+                  <Head>
+      <title>{name}</title>
+      </Head>
                 <Container className='bio-container'>
                     <Row>
                         <Col md={8}>

@@ -15,7 +15,9 @@ export default function Home() {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.5 }}
       >
-      
+      <Head>
+      <title>Public Art San Antonio</title>
+      </Head>
         <main className={`${styles.main}`}>
           <motion.h1
             initial={{ opacity: 0, y: -50 }}

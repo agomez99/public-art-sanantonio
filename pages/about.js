@@ -6,11 +6,7 @@ import Col from 'react-bootstrap/Col';
 import styles from '@/styles/About.module.css'
 import { motion } from 'framer-motion';
 import {FaGithub, FaLinkedin} from 'react-icons/fa';
-
-
-
-
-
+import Head from 'next/head'
 
 
 export default function About() {
@@ -24,6 +20,9 @@ export default function About() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
           >
+                <Head>
+      <title>Public Art San Antonio | About Me</title>
+      </Head>
             <div>
               <p>
                 Greetings, my name is Austine. I possess a strong passion for both web development and the arts.
