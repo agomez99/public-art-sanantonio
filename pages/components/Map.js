@@ -1,5 +1,5 @@
 import mapboxgl from "mapbox-gl";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { createRoot } from 'react-dom/client'
 
 import Image from "next/image";
@@ -356,9 +356,36 @@ const Map = () => {
       );
     });
 
-  }, []);
+  }, [ lat,lng, zoom]);
 
 
+
+
+
+const calculateDistance = useCallback( (lat1, lon1, lat2, lon2) => {
+    const R = 6371; // km
+    const dLat = degToRad(lat2 - lat1);
+    const dLon = degToRad(lon2 - lon1);
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(degToRad(lat1)) *
+        Math.cos(degToRad(lat2)) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const d = R * c;
+    return d;
+  }
+  , []);
+
+  const isApproximatelyEqual = (value1, value2, tolerance = 0.00001) => {
+    return Math.abs(value1 - value2) < tolerance;
+  };
+
+
+  const degToRad = (deg) => {
+    return deg * (Math.PI / 180);
+  };
   useEffect(() => {
     if (latitude && longitude) {
       const nearby = geoJson.features.filter(location => {
@@ -375,33 +402,13 @@ const Map = () => {
       setNearbyLocations(nearby);
 
     }
-  }, [latitude, longitude]);
+  }, [latitude, longitude, calculateDistance]);
 
 
 
-  const calculateDistance = (lat1, lon1, lat2, lon2) => {
-    const R = 6371; // Earth's radius in km
-    const dLat = degToRad(lat2 - lat1);
-    const dLon = degToRad(lon2 - lon1);
-    const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(degToRad(lat1)) * Math.cos(degToRad(lat2)) *
-      Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const distance = R * c;
-
-    // Convert distance from kilometers to miles
-    const milesPerKilometer = 0.621371;
-    return distance * milesPerKilometer;
-  };
-  const isApproximatelyEqual = (value1, value2, tolerance = 0.00001) => {
-    return Math.abs(value1 - value2) < tolerance;
-  };
 
 
-  const degToRad = (deg) => {
-    return deg * (Math.PI / 180);
-  };
+
   return (
 
     //show more button CSS
