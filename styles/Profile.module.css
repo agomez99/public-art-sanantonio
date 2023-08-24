@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed&display=swap');
+
+.bioContainer {
+    font-family: 'Fira Sans Extra Condensed', sans-serif;
+    color: #372545;
+
+}
+
+.bioName {
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+.bioAbout {
+    font-size: 1.6rem;
+}
+
+.imageBox {
+    padding: 5px;
+
+}
+
+.bioImage {
+    border-radius: 50%;
+}
+
+.works {
+    display: flex;
+    justify-content: center;
+}
+
+.artImage {
+    height: 150px;
+    margin: 10px;
+}
+
+.artHeading {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+
+
+
+}

@@ -32,9 +32,6 @@ a {
   text-decoration: none;
 }
 
-
-
-
 .map-container{
   height: 500px;
   width:100%;
@@ -48,10 +45,6 @@ a {
 }
 div.image-box-container{
   margin-top:1%;
-
-}
-.image-box{
-  padding: 5px;
 
 }
 
@@ -71,15 +64,7 @@ div.image-box-container{
 .image-list:hover{
   transform: scale(1.3);
 }
-.artist-header{
-  text-align: center;
-  margin-bottom: 5%;
-}
-.artist-image-container{
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-}
+
 h2.artlink{
   text-decoration: none;
   color: black;
@@ -88,10 +73,6 @@ h2.artlink{
 a:link { text-decoration: none; }
 
 
-.artist-image{
-  border-radius: 45%;
-  padding:5%;
-}
 .display-image{
   border-radius: 2%;
   height:300px;
@@ -108,18 +89,7 @@ a:link { text-decoration: none; }
 .nearby-image{
   height:60px;
 }
-.name-text{
-  text-align: center;
-  font-family: 'Fira Sans Extra Condensed', sans-serif;
-  color: #372545;
-}
 
-.name-link{
-  font-size: 1.3rem;
-  text-decoration: none;
-  font-family: 'Fira Sans Extra Condensed', sans-serif;
-  color: #372545;
-}
 
 .popup{
   display: flex;
@@ -139,11 +109,6 @@ a:link { text-decoration: none; }
   color:red;
 }
 
-.bio-container{
-  font-family: 'Fira Sans Extra Condensed', sans-serif;
-  color: #372545;
-
-}
 .loc-artist{
   text-align: center;
 
@@ -151,33 +116,6 @@ a:link { text-decoration: none; }
 .loc-heading{
   text-align: center;
 
-}
-
-.bio-name{
-  font-size: 2.5rem;
-  text-align: center;
-
-}
-.bio-about{
-  font-size: 1.6rem;
-
-
-}
-.bio-image{
-  border-radius: 50%;
-}
-.works{
-  display: flex;
- justify-content: center;
-}
-.artbio-heading{
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.art-image{
-  height:150px;
-  margin: 10px;
 }
 
 footer {
@@ -195,20 +133,14 @@ footer {
 
 }
 
-
-
 @media only screen and (max-width: 600px) {
-
 
   .image{
     width:100px;
     height:100px;
   }
 
-  .artist-image-container{
-    display: grid;
-    place-content: center;
-  }
+
  .display-image{
   width: 100%;
   height:100%;

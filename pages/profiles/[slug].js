@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { motion } from "framer-motion";
+import styles from '../../styles/Profile.module.css'
 
 import Head from 'next/head'
 
@@ -23,25 +24,26 @@ const Page = ({ name, avatar,imagesAndHeadings , about }) => {
                   <Head>
       <title>{name}</title>
       </Head>
-                <Container className='bio-container'>
+                <Container className={styles.bioContainer}  >
                     <Row>
                         <Col md={8}>
-                            <h1 className='bio-name'>{name}</h1>
-                            <p className='bio-about'>{about}</p>
+                            <h1 className={styles.bioName}>{name}</h1>
+                            <p className={styles.bioAbout}>{about}</p>
                         </Col>
 
                         <Col sm={4}>
-                            <div className="image-box">
-                                <Image src={avatar} width={300} height={300} alt="image" className='bio-image' />
+                            <div className={styles.imageBox}>
+               
+                                <Image src={avatar} width={300} height={300} alt="image" className={styles.bioImage} />
                             </div>
                         </Col>
                     </Row>
                     <Row>     
-                    <div className='works'>                     
+                    <div className={styles.works}>                     
                     {imagesAndHeadings.map(({ image, heading }, index) => (
                                 <div key={index} >
-                                    <Image src={image} width={200} height={200} alt="image" className='art-image' />
-                                    <p className='artbio-heading'>{heading}</p>
+                                    <Image src={image} width={200} height={200} alt="image" className={styles.artImage} />
+                                    <p className={styles.artHeading}>{heading}</p>
                                 </div>
                             ))}
                             </div>

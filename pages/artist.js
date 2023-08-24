@@ -5,10 +5,10 @@ import Head from 'next/head'
 export default function artist() {
   return (
     <div>
-          <Head>
-      <title>Public Art San Antonio</title>
+      <Head>
+        <title>Public Art San Antonio</title>
       </Head>
-      <Artists/>
-      </div>
+      <Artists />
+    </div>
   )
 }

@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed&display=swap');
+
+.artistContainer {
+    color: #372545;
+    font-family: 'Fira Sans Extra Condensed', sans-serif;
+
+}
+
+.artistHeader {
+    text-align: center;
+    margin-bottom: 5%;
+
+}
+
+.artistIndexContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    margin-bottom: 10%;
+}
+
+.artistLink {
+    font-size: 1.3rem;
+    text-decoration: none;
+    color: #372545;
+}
+
+.artistAvatar {
+    border-radius: 45%;
+    padding: 5%;
+    object-fit: cover;
+
+}
+
+.artistName {
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+
+}
+
+@media only screen and (max-width: 600px) {
+    .artistLink {
+     display: flex;
+     font-size: 1.5rem;
+
+    }
+    
+    .artistIndexContainer {
+        display:grid;
+        place-content: center;
+        margin-bottom: 25%;
+    }
+
+    .avatarContainer{
+        display: inline-block;
+    }
+    .artistAvatar {
+        border-radius:50px;
+        height:100px;
+        width: 100px;
+
+    }
+    
+
+}
