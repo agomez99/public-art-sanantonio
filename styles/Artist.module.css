@@ -26,11 +26,19 @@
 }
 
 .artistAvatar {
-    border-radius: 45%;
+    border-radius:50%;
     padding: 5%;
     object-fit: cover;
-
+    margin: 5px;
 }
+.artistAvatar:hover {
+    padding: 0%;
+    border: 5px solid  #372545;
+    margin: 5px;
+    transform: scale(1.1);
+}
+
+
 
 .artistName {
     text-align: center;
