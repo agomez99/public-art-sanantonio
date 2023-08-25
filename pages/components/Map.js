@@ -415,14 +415,15 @@ const Map = () => {
         </Col>
         <Col md={4}>
           <div className={styles.sidePanel}>
-            <Link href={`/profiles/${artistData.name}`}>
-              <h2 className={styles.artLink}> {artistData.name} </h2>
-            </Link>
-            <p> {artistData.heading} </p>
+
+            <h2> {artistData.heading} </h2>
             <p> Location: {artistData.address} </p>
             <a href="#side">
               <Image src={artistData.image} className={styles.featureImage} alt="featured-image" width={300} height={300} priority />
             </a>
+            <Link href={`/profiles/${artistData.name}`}>
+              <h3 className={styles.artLink}> by :{artistData.name} </h3>
+            </Link>
           </div>
         </Col>
       </Row>
