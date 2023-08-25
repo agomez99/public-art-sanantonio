@@ -375,7 +375,7 @@ const Map = () => {
           {dataForDisplay.map((location, index) => (
             <ul key={index} >
               <a href="#side">
-                <Image onClick={() => handleSelectLocation(location)} src={geoJson.features[index].properties.image} width={100} height={100} alt="location-image" className={styles.imageList}  priority={true} />
+                <Image onClick={() => handleSelectLocation(location)} src={geoJson.features[index].properties.image} width={100} height={100} alt="location-image" className={styles.imageList} />
               </a>
             </ul>
           ))}
@@ -399,7 +399,7 @@ const Map = () => {
                   <button
                     onClick={() => handleNearbyLocationClick(location)}
                   >
-                    <Image src={location.properties.image} className={styles.nearbyImage} alt="featured-image" width={60} height={60}  priority={true} as={'image'}/>
+                    <Image src={location.properties.image} className={styles.nearbyImage} alt="featured-image" width={60} height={60} />
                   </button>
                   <p> {calculateDistance(
                     latitude,
@@ -420,9 +420,9 @@ const Map = () => {
             </Link>
             <p> {artistData.heading} </p>
             <p> Location: {artistData.address} </p>
-            <Link href="#side">
-              <Image src={artistData.image} className={styles.featureImage} alt="featured-image" width={300} height={300} priority={true} as={'image'} />
-            </Link>
+            <a href="#side">
+              <Image src={artistData.image} className={styles.featureImage} alt="featured-image" width={300} height={300} priority />
+            </a>
           </div>
         </Col>
       </Row>
