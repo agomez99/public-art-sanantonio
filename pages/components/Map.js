@@ -68,17 +68,11 @@ const Map = () => {
 
   }
 
-
-
   const handleSelectLocation = (geoJson) => {
     const { coordinates } = geoJson.geometry;
     const { heading, name, image, address, description } = geoJson.properties;
-
-
     if (map.current) {
       const { flyTo, Popup } = map.current;
-
-
 
       const popupRef = popUpRef.current;
       popupRef
@@ -102,8 +96,6 @@ const Map = () => {
     };
     setSelectedLocation(selectedLocation);
   }
-
-
 
   // Initialize map when component mounts
   useEffect(() => {
@@ -260,8 +252,6 @@ const Map = () => {
 
     });
 
-
-
     map.on("click", ["points", "star"], function (e) {
       setName(e.features[0].properties.name);
       setImage(e.features[0].properties.image);
@@ -338,23 +328,23 @@ const Map = () => {
       );
     });
 
-  }, [ lat,lng, zoom]);
+  }, [lat, lng, zoom]);
 
-const calculateDistance = useCallback( (lat1, lon1, lat2, lon2) => {
+  const calculateDistance = useCallback((lat1, lon1, lat2, lon2) => {
     const R = 6371; // km
     const dLat = degToRad(lat2 - lat1);
     const dLon = degToRad(lon2 - lon1);
     const a =
       Math.sin(dLat / 2) * Math.sin(dLat / 2) +
       Math.cos(degToRad(lat1)) *
-        Math.cos(degToRad(lat2)) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
+      Math.cos(degToRad(lat2)) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     const d = R * c;
     return d;
   }
-  , []);
+    , []);
 
   const isApproximatelyEqual = (value1, value2, tolerance = 0.00001) => {
     return Math.abs(value1 - value2) < tolerance;
@@ -376,23 +366,23 @@ const calculateDistance = useCallback( (lat1, lon1, lat2, lon2) => {
           location.geometry.coordinates[1], latitude) &&
           !isApproximatelyEqual(location.geometry.coordinates[0], longitude);
       });
-          // Sort nearbyLocations based on distance
-          nearby.sort((a, b) => {
-            const distanceA = calculateDistance(
-              latitude,
-              longitude,
-              a.geometry.coordinates[1], // Latitude
-              a.geometry.coordinates[0]  // Longitude
-            );
-            const distanceB = calculateDistance(
-              latitude,
-              longitude,
-              b.geometry.coordinates[1], // Latitude
-              b.geometry.coordinates[0]  // Longitude
-            );
-            return distanceA - distanceB;
-          });
-    
+      // Sort nearbyLocations based on distance
+      nearby.sort((a, b) => {
+        const distanceA = calculateDistance(
+          latitude,
+          longitude,
+          a.geometry.coordinates[1], // Latitude
+          a.geometry.coordinates[0]  // Longitude
+        );
+        const distanceB = calculateDistance(
+          latitude,
+          longitude,
+          b.geometry.coordinates[1], // Latitude
+          b.geometry.coordinates[0]  // Longitude
+        );
+        return distanceA - distanceB;
+      });
+
       setNearbyLocations(nearby);
 
     }
@@ -405,7 +395,7 @@ const calculateDistance = useCallback( (lat1, lon1, lat2, lon2) => {
           {dataForDisplay.map((location, index) => (
             <ul key={index} >
               <a href="#side">
-                <Image onClick={() => handleSelectLocation(location)} src={geoJson.features[index].properties.image} width={100} height={100} alt="location-image" className="image-list" />
+                <Image onClick={() => handleSelectLocation(location)} src={geoJson.features[index].properties.image} width={100} height={100} alt="location-image" className={styles.imageList} />
               </a>
             </ul>
           ))}
@@ -413,7 +403,7 @@ const calculateDistance = useCallback( (lat1, lon1, lat2, lon2) => {
         </div>
         <h1>Locations</h1>
 
-        <div  >
+        <div>
           <Button type="button" onClick={() => setExpanded(!expanded)} className={styles.moreButton} >
             {expanded ?
               (
@@ -430,17 +420,14 @@ const calculateDistance = useCallback( (lat1, lon1, lat2, lon2) => {
             }
           </Button>
         </div>
-        </Row>
-        <Row className={styles.mapFeatureContainer} >
-
+      </Row>
+      <Row className={styles.mapFeatureContainer} >
         <Col md={8}>
           <div className={styles.mapContainer} ref={mapContainerRef} />
-
           <h2>Nearby Locations</h2>
           <div className={styles.nearbyContainer}>
             <ul>
               {nearbyLocations.map((location, index) => (
-
                 <li key={index} className={styles.nearbyList}>
                   <button
                     onClick={() => handleNearbyLocationClick(location)}
@@ -460,18 +447,17 @@ const calculateDistance = useCallback( (lat1, lon1, lat2, lon2) => {
 
         </Col>
         <Col md={4}>
-          <div className="sidebar">
-            <Link href={`/profiles/${artistData.name}`}> <h2 className="artlink"> {artistData.name} </h2></Link>
+          <div className={styles.sidePanel}>
+            <Link href={`/profiles/${artistData.name}`}> 
+            <h2 className={styles.artLink}> {artistData.name} </h2></Link>
             <p> {artistData.heading} </p>
             <p> Location: {artistData.address} </p>
             <a href="#side">
               <Image src={artistData.image} className={styles.featureImage} alt="featured-image" width={300} height={300} priority />
             </a>
-
           </div>
-
         </Col>
-        </Row>
+      </Row>
     </Container>
   )
 };

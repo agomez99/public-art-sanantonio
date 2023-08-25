@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed&display=swap');
+
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
@@ -17,90 +18,34 @@ body {
 
 }
 
-a.nav-link{
-  font-size: 1.5rem;
+a.nav-link {
+  font-size: 1.8rem;
   text-decoration: none;
   color: #372545;
-
-}
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.image-box-container{
-  display: flex;
-  flex-wrap: wrap;
-
-}
-div.image-box-container{
-  margin-top:1%;
-
-}
-
-.image-box img {
-  margin-top: 8px;
-  vertical-align: middle;
-}
-
-.image-list-container{
-  display: flex;
-  flex-wrap: wrap;
-  
-}
-.image-list{
-  border-radius: 5%;
-}
-.image-list:hover{
-  transform: scale(1.3);
-}
-
-h2.artlink{
-  text-decoration: none;
-  color: black;
-}
-
-a:link { text-decoration: none; }
-
-.mapboxgl-popup-content{
-  font-size: 1rem;
-  padding:5px;
-}
-
-.mapboxgl-popup-close-button{
-  font-size: 2rem;
-  color:#372545;
-}
-.mapboxgl-popup-close-button:hover{
-  font-size: 2rem;
-  color:red;
-}
-
-
-
-
-footer {
-  position: fixed;
-  background-color: #372545;
-  color: white;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin-top: auto;
-  text-align: center;
-  padding: 8px;
-  text-align: center;
   font-family: 'Fira Sans Extra Condensed', sans-serif;
-
+}
+a.nav-link:hover {
+  transform: scale(1.1);
+  color: #8f69ac;
 }
 
-@media only screen and (max-width: 600px) {
-
-  .image{
-    width:100px;
-    height:100px;
-  }
-
-
-
+a:link {
+  text-decoration: none;
 }
+
+.mapboxgl-popup-content {
+  font-size: 1rem;
+  padding: 5px;
+}
+
+.mapboxgl-popup-close-button {
+  font-size: 2rem;
+  color: #372545;
+}
+
+.mapboxgl-popup-close-button:hover {
+  font-size: 2rem;
+  color: red;
+}
+
+@media only screen and (max-width: 600px) {}

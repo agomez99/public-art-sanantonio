@@ -1,0 +1,15 @@
+
+.footer {
+    position: fixed;
+    background-color: #372545;
+    color: white;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-top: auto;
+    text-align: center;
+    padding: 8px;
+    text-align: center;
+    font-family: 'Fira Sans Extra Condensed', sans-serif;
+  
+  }
