@@ -69,32 +69,9 @@ const Map = () => {
   }
 
   const handleSelectLocation = (geoJson) => {
-    const { coordinates } = geoJson.geometry;
     const { heading, name, image, address, description } = geoJson.properties;
-    if (map.current) {
-      const { flyTo, Popup } = map.current;
-
-      const popupRef = popUpRef.current;
-      popupRef
-        .setLngLat(coordinates)
-        .setHTML(popupContent)
-        .addTo(map.current);
-    }
-
     const artistData = { heading, name, image, address };
-
     setArtistData(artistData);
-
-    const selectedLocation = {
-      name,
-      latitude: coordinates[1],
-      longitude: coordinates[0],
-      heading,
-      image,
-      address,
-      description,
-    };
-    setSelectedLocation(selectedLocation);
   }
 
   // Initialize map when component mounts
@@ -326,8 +303,11 @@ const Map = () => {
         },
         labelLayerId
       );
+      
     });
-
+    return () => {
+      map.remove();
+    };
   }, [lat, lng, zoom]);
 
   const calculateDistance = useCallback((lat1, lon1, lat2, lon2) => {
@@ -395,29 +375,16 @@ const Map = () => {
           {dataForDisplay.map((location, index) => (
             <ul key={index} >
               <a href="#side">
-                <Image onClick={() => handleSelectLocation(location)} src={geoJson.features[index].properties.image} width={100} height={100} alt="location-image" className={styles.imageList} />
+                <Image onClick={() => handleSelectLocation(location)} src={geoJson.features[index].properties.image} width={100} height={100} alt="location-image" className={styles.imageList}  priority={true} />
               </a>
             </ul>
           ))}
 
         </div>
         <h1>Locations</h1>
-
         <div>
           <Button type="button" onClick={() => setExpanded(!expanded)} className={styles.moreButton} >
-            {expanded ?
-              (
-                <>
-                  <ArrowUp /> show less
-                </>
-              )
-              :
-              (
-                <>
-                  <ArrowDown />show more
-                </>
-              )
-            }
+            {expanded ? (<><ArrowUp /> show less</>) : (<> <ArrowDown />show more</>)}
           </Button>
         </div>
       </Row>
@@ -432,7 +399,7 @@ const Map = () => {
                   <button
                     onClick={() => handleNearbyLocationClick(location)}
                   >
-                    <Image src={location.properties.image} className={styles.nearbyImage} alt="featured-image" width={60} height={60} />
+                    <Image src={location.properties.image} className={styles.nearbyImage} alt="featured-image" width={60} height={60}  priority={true} as={'image'}/>
                   </button>
                   <p> {calculateDistance(
                     latitude,
@@ -448,19 +415,19 @@ const Map = () => {
         </Col>
         <Col md={4}>
           <div className={styles.sidePanel}>
-            <Link href={`/profiles/${artistData.name}`}> 
-            <h2 className={styles.artLink}> {artistData.name} </h2></Link>
+            <Link href={`/profiles/${artistData.name}`}>
+              <h2 className={styles.artLink}> {artistData.name} </h2>
+            </Link>
             <p> {artistData.heading} </p>
             <p> Location: {artistData.address} </p>
-            <a href="#side">
-              <Image src={artistData.image} className={styles.featureImage} alt="featured-image" width={300} height={300} priority />
-            </a>
+            <Link href="#side">
+              <Image src={artistData.image} className={styles.featureImage} alt="featured-image" width={300} height={300} priority={true} as={'image'} />
+            </Link>
           </div>
         </Col>
       </Row>
     </Container>
   )
 };
-
 
 export default Map;
