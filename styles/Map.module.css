@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed&display=swap');
+.container{
+    text-align: center;
+    font-family: 'Fira Sans Extra Condensed', sans-serif;
+
+}
+.imageboxContainer{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top:1%;
+    text-align: center;
+
+}
+
+.mapContainer {
+    height: 500px;
+    width: 100%;
+}
+
+.popupContainer {
+    font-family: 'Fira Sans Extra Condensed', sans-serif;
+}
+
+.popupHeading {
+    font-size: 1.4rem;
+}
+
+.popupImage {
+    width: auto;
+}
+
+.popupArtist {
+    text-align: center;
+}
+
+.moreButton {
+    background-color: #372545;
+    color: white;
+    margin-bottom: 1rem;
+    width: 50%;
+    font-size: 1.5rem;
+    border: none;
+    text-align: center;
+
+}
+
+.moreButton:hover {
+    background-color: white;
+    color: #372545;
+    margin-bottom: 1rem;
+    width: 50%;
+    border: 1px solid #372545;
+}
+
+
+.featureImage {
+    border-radius: 2%;
+}
+
+.nearbyImage {
+    height: 60px;
+
+}
+
+.nearbyContainer {
+    margin-bottom: 100px;
+    justify-content: space-between;
+}
+
+.nearbyList {
+    list-style: none;
+    display: inline-block;
+}
+
+@media only screen and (max-width: 600px) {
+    .mapFeatureContainer {
+        display: flex;
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+
+    .mapContainer {
+        height: 500px;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .moreButton {
+        font-size: 1rem;
+        width: 100%;
+
+    }
+
+    .moreButton:hover {
+        background-color: white;
+        width: 100%;
+    }
+
+    .featureImage {
+        width: 100%;
+        height: 100%;
+        margin-bottom: 20px;
+    }
+
+    .nearbyContainer {
+        margin-bottom: 30%;
+
+    }
+}

@@ -1,7 +1,6 @@
 import mapboxgl from "mapbox-gl";
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { createRoot } from 'react-dom/client'
-
 import Image from "next/image";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -9,21 +8,21 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { ArrowDown, ArrowUp } from 'react-bootstrap-icons';
 import Link from "next/link"
-
 import geoJson from "../data/locations.json"
 import otherlocations from "../data/otherlocations.json"
+import styles from '../../styles/Map.module.css'
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOXKEY;
 
 
 const Popup = ({ heading, name, image }) => (
-  <div className="popup-container">
-    <p className="loc-heading"> {heading}</p>
+  <div className={styles.popupContainer}>
+    <p className={styles.popupHeading}> {heading}</p>
     <div className="popup" id="popupId">
       <a href="">
-        <Image className="loc-image" src={image} alt="location image" width={70} height={70} />
+        <Image className={styles.popupImage} src={image} alt="location image" width={70} height={70} />
       </a>
     </div>
-    <p className="loc-artist"> By: {name}</p>
+    <p className={styles.popupArtist}> By: {name}</p>
   </div>
 )
 
@@ -66,8 +65,6 @@ const Map = () => {
   };
   const handleNearbyLocationClick = (location) => {
     handleSelectLocation(location);
-    setExpanded(false);
-    setZoom(15);
 
   }
 
@@ -77,26 +74,11 @@ const Map = () => {
     const { coordinates } = geoJson.geometry;
     const { heading, name, image, address, description } = geoJson.properties;
 
-    const newZoom = 15;
 
     if (map.current) {
       const { flyTo, Popup } = map.current;
 
-      flyTo({
-        center: coordinates,
-        zoom: newZoom,
-        essential: true,
-      });
 
-      const popupContent = (
-        <Popup
-          heading={heading}
-          name={name}
-          image={image}
-          address={address}
-          description={description}
-        />
-      );
 
       const popupRef = popUpRef.current;
       popupRef
@@ -358,10 +340,6 @@ const Map = () => {
 
   }, [ lat,lng, zoom]);
 
-
-
-
-
 const calculateDistance = useCallback( (lat1, lon1, lat2, lon2) => {
     const R = 6371; // km
     const dLat = degToRad(lat2 - lat1);
@@ -382,7 +360,6 @@ const calculateDistance = useCallback( (lat1, lon1, lat2, lon2) => {
     return Math.abs(value1 - value2) < tolerance;
   };
 
-
   const degToRad = (deg) => {
     return deg * (Math.PI / 180);
   };
@@ -399,58 +376,32 @@ const calculateDistance = useCallback( (lat1, lon1, lat2, lon2) => {
           location.geometry.coordinates[1], latitude) &&
           !isApproximatelyEqual(location.geometry.coordinates[0], longitude);
       });
+          // Sort nearbyLocations based on distance
+          nearby.sort((a, b) => {
+            const distanceA = calculateDistance(
+              latitude,
+              longitude,
+              a.geometry.coordinates[1], // Latitude
+              a.geometry.coordinates[0]  // Longitude
+            );
+            const distanceB = calculateDistance(
+              latitude,
+              longitude,
+              b.geometry.coordinates[1], // Latitude
+              b.geometry.coordinates[0]  // Longitude
+            );
+            return distanceA - distanceB;
+          });
+    
       setNearbyLocations(nearby);
 
     }
   }, [latitude, longitude, calculateDistance]);
 
-
-
-
-
-
   return (
-
-    //show more button CSS
-    <Container>
-      <style type="text/css">
-        {`
-    .btn-flat {
-      background-color: #372545;
-      color: white;
-      margin-bottom: 1rem;
-      width:50%;
-    }
-    .btn-flat:hover {
-      background-color: white;
-      color:  #372545;
-      margin-bottom: 1rem;
-      width:50%;
-      border: 1px solid #372545;
-    }
-    .btn-xxl {
-      font-size: 1.5rem;
-    }
-    
-    @media only screen and (max-width: 600px) {
-        .btn-xxl {
-          font-size: 1rem;
-        }
-        .btn-flat {
-
-      width:100%;
-    }
-     .btn-flat:after  {
-      background-color:white;
-      width:100%;
-    }
-      
-    }
-    `}
-
-      </style>
-      <Row className="text-center" >
-        <div className="image-box-container ">
+    <Container className={styles.container}>
+      <Row  >
+        <div className={styles.imageboxContainer}>
           {dataForDisplay.map((location, index) => (
             <ul key={index} >
               <a href="#side">
@@ -462,8 +413,8 @@ const calculateDistance = useCallback( (lat1, lon1, lat2, lon2) => {
         </div>
         <h1>Locations</h1>
 
-        <div className="text-center" >
-          <Button type="button" onClick={() => setExpanded(!expanded)} variant="flat" size="xxl" >
+        <div  >
+          <Button type="button" onClick={() => setExpanded(!expanded)} className={styles.moreButton} >
             {expanded ?
               (
                 <>
@@ -480,30 +431,21 @@ const calculateDistance = useCallback( (lat1, lon1, lat2, lon2) => {
           </Button>
         </div>
         </Row>
-        <Row className="text-center mapfeature-container" >
+        <Row className={styles.mapFeatureContainer} >
 
         <Col md={8}>
-          <div className="map-container" ref={mapContainerRef} />
-          {/*           
-          {latitude && longitude ? (
-        <div>
-          Latitude: {latitude}<br />
-          Longitude: {longitude}
-        </div>
-      ) : (
-        <p>Loading...</p>
-      )} */}
+          <div className={styles.mapContainer} ref={mapContainerRef} />
 
           <h2>Nearby Locations</h2>
-          <div class="nearby-container">
+          <div className={styles.nearbyContainer}>
             <ul>
               {nearbyLocations.map((location, index) => (
 
-                <li key={index} className="nearby-list">
+                <li key={index} className={styles.nearbyList}>
                   <button
                     onClick={() => handleNearbyLocationClick(location)}
                   >
-                    <img src={location.properties.image} className="nearby-image" alt="featured-image" />
+                    <Image src={location.properties.image} className={styles.nearbyImage} alt="featured-image" width={60} height={60} />
                   </button>
                   <p> {calculateDistance(
                     latitude,
@@ -523,7 +465,7 @@ const calculateDistance = useCallback( (lat1, lon1, lat2, lon2) => {
             <p> {artistData.heading} </p>
             <p> Location: {artistData.address} </p>
             <a href="#side">
-              <img src={artistData.image} className="display-image" alt="featured-image" />
+              <Image src={artistData.image} className={styles.featureImage} alt="featured-image" width={300} height={300} priority />
             </a>
 
           </div>
